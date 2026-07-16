@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
     player.scource=(Rectangle){0,0,player.texture.width,player.texture.height};
     player.dest=(Rectangle){playerx,playery,playerw,playerh};
     player.origin=(Vector2){0,0};
-    player.health=10;
+    player.health=1000;
     player.startHealth=10;
     player.gameOver=false;
     player.time=IMMUNITY_TIMER;
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     
     while (!WindowShouldClose())    
     {
-        if(player.health>0)updateAttack(&boss, bullets);
+        if(player.health>0)updateAttack(&boss, bullets, beams);
         if(player.health>0)updateArea(&player,&playableArea);
         if(player.health>0)updatePlayer(&player, &playableArea);
         if(player.health>0)updateBullets(bullets,hurty,player.dest, &player.immunity,&player.health);

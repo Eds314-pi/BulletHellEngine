@@ -47,6 +47,7 @@ struct bullet
         float angle;
         int power;
         int maxPower;
+        int delay;
         int damage;
         bool fired;
         bool decay;
@@ -100,7 +101,7 @@ struct bullet
         struct attack attacks[MAX_ATTACKS];
         int currentAttack;
     };
-    void updateAttack(struct fight *fight, struct bullet *bullets);
+    void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beams);
     struct player
     {
         bool immunity;

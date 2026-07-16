@@ -19,7 +19,7 @@ void updateBullets(struct bullet bullets[], Sound hurty, Rectangle dest, bool* i
             }
             bullets[i].hurtbox.x+=bullets[i].velocx;
             bullets[i].hurtbox.y+=bullets[i].velocy;
-            if(CheckCollisionRecs(dest,bullets[i].hurtbox) && !(*immunity))
+            if(CheckCollisionRecs(dest,bullets[i].hurtbox) && !(*immunity) && bullets[i].damage>0)
             {
 
                 bullets[i].lifetime=0;
@@ -138,10 +138,7 @@ void bulletRMaker(cJSON *move, struct fight *boss, int count)
         {
             if(boss->attacks[count].moveset.bullets[i].lifetime==0)
             {
-                printf("bullets = %p\n", (void *)boss->attacks[count].moveset.bullets);
-printf("bulletTimer = %p\n", (void *)boss->attacks[count].moveset.bulletTimer);
-printf("count = %d\n", count);
-printf("i = %d\n", i);
+                
                 boss->attacks[count].moveset.bulletTimer[i]=delayJSON->valueint;
                 boss->attacks[count].moveset.bullets[i].texture=LoadTexture(texture);
                 boss->attacks[count].moveset.bullets[i].hurtbox.x=pos_xJSON->valueint+seperation_xJSON->valuedouble*random;

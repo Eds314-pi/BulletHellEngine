@@ -26,6 +26,17 @@ void typeHandler(cJSON* moveset, struct fight *boss, int count)
                         break;
                 }
             break;
+            case'-':
+                switch(type)
+                {
+                    case'S':
+                        beamSMaker(move,boss,count);
+                        break;
+                    case'L':
+                        beamLMaker(move,boss,count);
+                        break;
+
+                }
         }
         i++;
     }
