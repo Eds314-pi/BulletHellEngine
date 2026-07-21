@@ -1,4 +1,6 @@
 #include "../include/runMethods.h"
+#include <cjson/cJSON.h>
+#include <raylib.h>
 void updatePlayer(struct player *player, struct area *area)
 {
     if(player->freeMoveY)
@@ -53,5 +55,102 @@ void Drawplayer(struct player *player)
     DrawTexturePro(player->texture,player->scource,player->dest,player->origin,0.0f,player->color);
     DrawRectangle(player->maxHealth.x,player->maxHealth.y,player->maxHealth.width,player->maxHealth.height,RED);
     DrawRectangle(player->currentHealth.x,player->currentHealth.y,player->currentHealth.width,player->currentHealth.height,YELLOW);
+
+}
+
+void playerModifer(cJSON *move, struct fight *boss, int count)
+{
+    cJSON* textureJSON=cJSON_GetObjectItem(move, "texture");
+    cJSON* player_x=cJSON_GetObjectItem(move, "player_x");
+    cJSON* player_y=cJSON_GetObjectItem(move, "player_y");
+    cJSON* player_width=cJSON_GetObjectItem(move, "player_width");
+    cJSON* player_height=cJSON_GetObjectItem(move, "player_height");
+    cJSON* player_speedX=cJSON_GetObjectItem(move, "player_speedX");
+    cJSON* player_speedY=cJSON_GetObjectItem(move, "player_speedY");
+    cJSON* freeMoveX=cJSON_GetObjectItem(move, "freeMoveX");
+    cJSON* freeMoveY=cJSON_GetObjectItem(move, "freeMoveY");
+    cJSON* delay=cJSON_GetObjectItem(move, "delay");
+    if(player_x!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.dest.x=player_x->valueint;
+    }else{
+        boss->events[boss->currentEvent].orders.playa.dest.x=-1;
+    }
+
+    if(player_y!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.dest.y=player_y->valueint;
+    }else{
+        boss->events[boss->currentEvent].orders.playa.dest.y=-1;
+    }
+
+    if(player_width!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.dest.width=player_width->valuedouble*GetScreenWidth();
+    }else {
+        boss->events[boss->currentEvent].orders.playa.dest.width=-1;
+    }
+
+    if(player_height!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.dest.height=player_height->valuedouble*GetScreenWidth();
+    }else{
+        boss->events[boss->currentEvent].orders.playa.dest.height=-1;
+    }
+
+    if(player_speedX!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.accelx=player_speedX->valueint;
+    }else{
+        boss->events[boss->currentEvent].orders.playa.accelx=-1;
+    }
+
+    if(player_speedY!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.accely=player_speedY->valueint;
+    }else{
+        boss->events[boss->currentEvent].orders.playa.accely=-1;
+    }
+    boss->events[boss->currentEvent].orders.timer=delay->valueint;
+    //ID for player modification
+    boss->events[boss->currentEvent].orders.id=1;
+
+    if(textureJSON!=NULL)
+    {
+        char texture[250];
+        sprintf(texture,"../images/%s",textureJSON->valuestring);
+        boss->events[boss->currentEvent].orders.playa.texture=LoadTexture(texture);
+        boss->events[boss->currentEvent].orders.playa.scource=(Rectangle){0,0, boss->events[boss->currentEvent].orders.playa.texture.width, boss->events[boss->currentEvent].orders.playa.texture.height};
+    }
+
+    if(freeMoveX!=NULL)
+    {
+        char movement=freeMoveX->valuestring[0];
+        switch(movement)
+        {
+            case 'Y':
+                boss->events[boss->currentEvent].orders.playa.freeMoveX=true;
+                break;
+            case 'N':
+                boss->events[boss->currentEvent].orders.playa.freeMoveX=false;
+                break;
+        }
+    }
+
+    if(freeMoveY!=NULL)
+    {
+        char movement=freeMoveY->valuestring[0];
+        switch(movement)
+        {
+            case 'Y':
+                boss->events[boss->currentEvent].orders.playa.freeMoveY=true;
+                break;
+            case 'N':
+                boss->events[boss->currentEvent].orders.playa.freeMoveY=false;
+                break;
+        }
+    }
+
+
 
 }

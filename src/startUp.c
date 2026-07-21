@@ -29,11 +29,22 @@ void openFile(char* fileName, struct fight *boss)
     cJSON* attacks = cJSON_GetObjectItem(fight, "attacks");
     cJSON* attack = cJSON_GetArrayItem(attacks, 0);
     cJSON* attackCountJSON = cJSON_GetObjectItem(fight,"attackcount");
+    cJSON* events = cJSON_GetObjectItem(fight, "event");
+    cJSON* event = cJSON_GetArrayItem(events, 0);
+  
     int i=0;
     cJSON_ArrayForEach(attack, attacks)
     {
         cJSON *moveset=cJSON_GetObjectItem(attack,"moveset");
         typeHandler(moveset, boss,i);
+        i++;
+    }
+    i=0;
+    cJSON_ArrayForEach(event, events)
+    {
+        cJSON *command=cJSON_GetObjectItem(event,"commands");
+        printf("Commands: %d\n", cJSON_GetArraySize(command));
+        commandHandler(command,boss,i);
         i++;
     }
     

@@ -1,6 +1,6 @@
 #include "../include/runMethods.h"
 #include "../include/readFile.h"
-void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beams)
+void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beams, struct spawner *spawners)
 {
     for(int j = 0; j < MAX_BULLETS; j++)
         {
@@ -46,7 +46,6 @@ void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beam
                     {
                         if(beams[j].lifetime==0 && fight->attacks[fight->currentAttack].moveset.beams[i].texture.id!=0)
                         {
-                            printf("Spawned beam %d lifetime=%d\n", j, beams[j].lifetime);
                             beams[j]=fight->attacks[fight->currentAttack].moveset.beams[i];
                             fight->attacks[fight->currentAttack].moveset.beamTimer[i]=-1;
                             fight->attacks[fight->currentAttack].moveset.beams[i]=(struct beam){0};
@@ -58,6 +57,35 @@ void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beam
                             break;
                         }
                     }
+                }
+            }
+        }
+
+
+        for(int i=0;i<MAX_SPAWNERS;i++)
+        {
+            if(fight->attacks[fight->currentAttack].moveset.spawnTimer[i]>=0)
+            {
+                if(fight->attacks[fight->currentAttack].moveset.spawnTimer[i]>0)
+                {
+                    fight->attacks[fight->currentAttack].moveset.spawnTimer[i]--;
+                }else{
+                    for(int j=0;j<MAX_SPAWNERS;j++)
+                    {
+                        if(spawners[j].lifetime==0 && fight->attacks[fight->currentAttack].moveset.spawners[i].texture.id!=0)
+                        {
+                            spawners[j]=fight->attacks[fight->currentAttack].moveset.spawners[i];
+                            fight->attacks[fight->currentAttack].moveset.spawnTimer[i]=-1;
+                            fight->attacks[fight->currentAttack].moveset.spawners[i]=(struct spawner){0};
+                            fight->attacks[fight->currentAttack].moveset.total--;
+                            if(fight->attacks[fight->currentAttack].moveset.total==0)
+                            {
+                                fight->currentAttack++;
+                            }
+                            break;
+                        }
+                    }
+                
                 }
             }
         }

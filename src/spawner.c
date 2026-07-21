@@ -1,4 +1,5 @@
 #include "../include/runMethods.h"
+#include <cjson/cJSON.h>
 void spawnBullet(struct spawner spawners, struct bullet bullets[]);
 void spawnBeam(struct spawner *spawners, struct beam beams[]);
 
@@ -104,4 +105,73 @@ void spawnBeam(struct spawner *spawners, struct beam beams[])
             *spawners=(struct spawner){0};
         }
     }
+}
+
+void spawnerSMaker(cJSON* move, struct fight *boss, int count)
+{
+    cJSON* textureJSON = cJSON_GetObjectItem(move,"texture");
+    cJSON* childTextureJSON=cJSON_GetObjectItem(move, "childTexture");
+    cJSON* posXJSON=cJSON_GetObjectItem(move,"pos_x");
+    cJSON* posYJSON=cJSON_GetObjectItem(move,"pos_y");
+    cJSON* velocXJSON=cJSON_GetObjectItem(move,"veloc_x");
+    cJSON* velocyJSON=cJSON_GetObjectItem(move,"veloc_y");
+    cJSON* widthJSON=cJSON_GetObjectItem(move,"width");
+    cJSON* heightJSON=cJSON_GetObjectItem(move,"height");
+    cJSON* damageJSON=cJSON_GetObjectItem(move,"damage");
+    cJSON* behaviorJSON=cJSON_GetObjectItem(move, "behavior");
+    cJSON* angleJSON=cJSON_GetObjectItem(move, "angle");
+    cJSON* followJSON=cJSON_GetObjectItem(move,"follow");
+    cJSON* repeatJSON=cJSON_GetObjectItem(move, "repeat");
+    cJSON* repeat_delayJSON=cJSON_GetObjectItem(move, "repeat_delay");
+    cJSON* lifetimeJSON=cJSON_GetObjectItem(move,"lifetime");
+    cJSON* childLifetimeJSON=cJSON_GetObjectItem(move,"childLifetime");
+    cJSON* delayJSON=cJSON_GetObjectItem(move,"delay");
+
+    char texture[250];
+    char cTexture[250];
+    sprintf(texture,"../images/%s",textureJSON->valuestring);
+    sprintf(cTexture,"../images/%s",childTextureJSON->valuestring);
+    for(int i=0;i<MAX_SPAWNERS;i++)
+    {
+        if(boss->attacks[count].moveset.spawnTimer[i]==0)
+        {
+            boss->attacks[count].moveset.spawners[i].texture=LoadTexture(texture);
+            boss->attacks[count].moveset.spawners[i].spawnTexture=LoadTexture(cTexture);
+            boss->attacks[count].moveset.spawners[i].scource=(Rectangle){0,0,boss->attacks[count].moveset.spawners[i].texture.width,boss->attacks[count].moveset.spawners[i].texture.height};
+            
+            boss->attacks[count].moveset.spawners[i].hurtbox.x=posXJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].hurtbox.y=posYJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].hurtbox.width=GetScreenWidth()*widthJSON->valuedouble;
+            boss->attacks[count].moveset.spawners[i].hurtbox.height=GetScreenHeight()*heightJSON->valuedouble;
+            
+            boss->attacks[count].moveset.spawners[i].maxVecx=velocXJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].maxVecy=velocyJSON->valueint;
+
+            boss->attacks[count].moveset.spawners[i].damage=damageJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].behaivor=behaviorJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].cont=repeatJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].contTime=repeat_delayJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].childLifetime=childLifetimeJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].fired=false;
+            boss->attacks[count].moveset.spawners[i].spread=angleJSON->valueint;
+
+            boss->attacks[count].moveset.spawners[i].lifetime=lifetimeJSON->valueint;
+            boss->attacks[count].moveset.spawnTimer[i]=delayJSON->valueint;
+
+            switch(followJSON->valuestring[0])
+            {
+                case 'N':
+                    boss->attacks[count].moveset.spawners[i].follow=false;
+                    boss->attacks[count].moveset.spawners[i].velocx=boss->attacks[count].moveset.spawners[i].maxVecx;
+                    boss->attacks[count].moveset.spawners[i].velocy=boss->attacks[count].moveset.spawners[i].maxVecy;
+                    break;
+                case'Y':
+                    boss->attacks[count].moveset.spawners[i].follow=true;
+            }
+            boss->attacks[count].moveset.total++;
+            break;
+        }
+        
+    }
+    
 }

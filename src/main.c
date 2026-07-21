@@ -14,7 +14,6 @@ int main(int argc, char* argv[])
     Sound beam=LoadSound("../sounds/blaster.mp3");
 
     struct fight boss={0};
-    openFile(fileName,&boss);
     struct bullet bullets[MAX_BULLETS]={0};
     struct beam beams[MAX_BEAMS]={0};
     struct spawner spawners[MAX_SPAWNERS]={0};
@@ -52,16 +51,17 @@ int main(int argc, char* argv[])
     player.freeMoveY=true;
     player.linex=1;
     player.liney=1;
-
+    openFile(fileName,&boss);
     
     while (!WindowShouldClose())    
     {
-        if(player.health>0)updateAttack(&boss, bullets, beams);
+        if(player.health>0)updateAttack(&boss, bullets, beams, spawners);
         if(player.health>0)updateArea(&player,&playableArea);
         if(player.health>0)updatePlayer(&player, &playableArea);
         if(player.health>0)updateBullets(bullets,hurty,player.dest, &player.immunity,&player.health);
         if(player.health>0)updateBeams(beams,hurty,beam,player.beamCollison,&player.immunity,&player.health);
         if(player.health>0)updateSpawner(spawners,beams,bullets, player.dest, hurty,&player.immunity, &player.health);
+        if(player.health>0)updateEvent(&boss, &player, &playableArea);
         if(player.health<=0)
         {
             player.gameOver=true;

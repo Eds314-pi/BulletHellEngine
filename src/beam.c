@@ -54,7 +54,7 @@ void DrawBeams(struct beam beams[], Sound hurty, Sound beam, Vector2 beamColliso
 
 void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamCollison[],bool* immunity, int* health)
 {
-    if(beams->lifetime==DECAY_TIMER)
+    if(beams->lifetime==beams->decay_timer)
     {
         beams->decay=true;
     }
@@ -102,6 +102,7 @@ void beamSMaker(cJSON *move, struct fight *boss, int count)
     cJSON* angleJSON=cJSON_GetObjectItem(move,"angle");
     cJSON* lifetimeJSON=cJSON_GetObjectItem(move,"lifetime");
     cJSON* delayJSON=cJSON_GetObjectItem(move, "delay");
+    cJSON* decayJSON=cJSON_GetObjectItem(move, "decayDelay");
     char texture[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
 
@@ -124,6 +125,7 @@ void beamSMaker(cJSON *move, struct fight *boss, int count)
             boss->attacks[count].moveset.beams[i].scource=(Rectangle){0,0,boss->attacks[count].moveset.beams[i].texture.width,boss->attacks[count].moveset.beams[i].texture.height};
             boss->attacks[count].moveset.beams[i].pos=(Vector2){boss->attacks[count].moveset.beams[i].hurtbox.x,boss->attacks[count].moveset.beams[i].hurtbox.y};
             boss->attacks[count].moveset.beams[i].delay=0;
+            boss->attacks[count].moveset.beams[i].decay_timer=decayJSON->valueint;
             boss->attacks[count].moveset.total++;
             break;
         }
@@ -146,6 +148,7 @@ void beamLMaker(cJSON* move, struct fight *boss, int count)
     cJSON* seperation_yJSON=cJSON_GetObjectItem(move,"seperation_y");
     cJSON* change_angleJSON=cJSON_GetObjectItem(move,"change_angle");
     cJSON* beamtimeJSON=cJSON_GetObjectItem(move,"beam_delay");
+    cJSON* decayJSON=cJSON_GetObjectItem(move, "decayDelay");
     char texture[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
 
@@ -170,6 +173,7 @@ void beamLMaker(cJSON* move, struct fight *boss, int count)
                 boss->attacks[count].moveset.beams[i].scource=(Rectangle){0,0,boss->attacks[count].moveset.beams[i].texture.width,boss->attacks[count].moveset.beams[i].texture.height};
                 boss->attacks[count].moveset.beams[i].pos=(Vector2){boss->attacks[count].moveset.beams[i].hurtbox.x,boss->attacks[count].moveset.beams[i].hurtbox.y};
                 boss->attacks[count].moveset.beams[i].delay=beamtimeJSON->valueint*z;
+                boss->attacks[count].moveset.beams[i].decay_timer=decayJSON->valueint;
                 boss->attacks[count].moveset.total++;
                 break;
             }

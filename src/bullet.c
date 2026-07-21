@@ -97,38 +97,23 @@ void bulletSMaker(cJSON *attack, struct fight *boss, int count)
 
 void bulletRMaker(cJSON *move, struct fight *boss, int count)
 {
-    puts("started random");
+   
     char texture[250];
     cJSON* textureJSON=cJSON_GetObjectItem(move,"texture");
-    puts("next random");
     cJSON* numberJSON=cJSON_GetObjectItem(move,"number");
-     puts("next random");
     cJSON* pos_xJSON=cJSON_GetObjectItem(move,"pos_x");
-     puts("next random");
     cJSON* seperation_xJSON=cJSON_GetObjectItem(move,"seperation_x");
-     puts("next random");
     cJSON* pos_yJSON=cJSON_GetObjectItem(move,"pos_y");
-     puts("next random");
     cJSON* seperation_yJSON=cJSON_GetObjectItem(move,"seperation_y");
-     puts("next random");
     cJSON* veloc_xJSON=cJSON_GetObjectItem(move,"veloc_x");
-     puts("next random");
     cJSON* varveloc_xJSON=cJSON_GetObjectItem(move,"+-veloc_x");
-     puts("next random");
     cJSON* veloc_yJSON=cJSON_GetObjectItem(move,"veloc_y");
-     puts("next random");
     cJSON* varveloc_yJSON=cJSON_GetObjectItem(move,"+-veloc_y");
-     puts("next random");
     cJSON* widthJSON=cJSON_GetObjectItem(move,"width");
-     puts("next random");
     cJSON* heightJSON=cJSON_GetObjectItem(move,"height");
-     puts("next random");
     cJSON* damageJSON=cJSON_GetObjectItem(move,"damage");
-     puts("next random");
     cJSON* followJSON=cJSON_GetObjectItem(move,"follow");
-     puts("next random");
     cJSON* lifetimeJSON=cJSON_GetObjectItem(move,"lifetime");
-     puts("next random");
     cJSON* delayJSON=cJSON_GetObjectItem(move,"delay");
     sprintf(texture,"../images/%s",textureJSON->valuestring);
     float random=((float)rand()/RAND_MAX)*2.0f-1.0f;
