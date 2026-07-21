@@ -27,9 +27,12 @@ struct bullet
         double velocx;
         double velocy;
         bool follow;
+        bool gravity;
         //lifetimes are measured in frames 60fps is default
         int lifetime;    
         int damage;
+        double gravStrength;
+        char direction;
     };
     void DrawBullets(struct bullet bullets[], Sound, Rectangle, bool*, int* health);
     void updateBullets(struct bullet bullets[], Sound, Rectangle, bool*, int* health);
@@ -80,6 +83,9 @@ struct bullet
         int warning;
         bool follow;
         bool fired;
+        bool gravity;
+        double gravStrength;
+        char direction;
         
     };
     void updateSpawner(struct spawner spawners[], struct beam beams[], struct bullet bullets[],Rectangle dest, Sound hurty,bool* immunity, int* health);

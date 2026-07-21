@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     Sound hurty=LoadSound("../sounds/hurt.mp3");
     Sound beam=LoadSound("../sounds/blaster.mp3");
 
-    struct fight boss={0};
+    static struct fight boss;
     struct bullet bullets[MAX_BULLETS]={0};
     struct beam beams[MAX_BEAMS]={0};
     struct spawner spawners[MAX_SPAWNERS]={0};

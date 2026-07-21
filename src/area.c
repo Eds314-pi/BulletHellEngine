@@ -71,17 +71,13 @@ void setPlayerX(struct player *player, struct area *playablearea)
     for(int i=1;i<playablearea->linex;i++)
     {
         distance=abs(playablearea->lockx[i]-player->dest.x);
-        printf("i=%d lock=%d dist=%d min=%d\n",
-       i,
-       playablearea->lockx[i],
-       distance,
-       mimimumDistance);
         if(distance<mimimumDistance)
         {
             mimimumDistance=distance;
             player->linex=i;
         }
-        printf("player x= %d\n",player->linex);
+        player->linex++;
+        player->linex--;
 
 
     }
@@ -100,7 +96,8 @@ void setPlayerY(struct player *player, struct area *playablearea)
             mimimumDistance=distance;
             player->liney=i;
         }
-        printf("player y= %d\n",player->liney);
+        player->liney--;
+        player->liney++;
 
     }
 }

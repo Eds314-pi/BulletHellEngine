@@ -84,6 +84,12 @@ void spawnBullet(struct spawner spawners, struct bullet bullets[])
                 bullets[j].scource=(Rectangle){0,0,bullets[j].texture.width,bullets[j].texture.height};
                 bullets[j].lifetime=spawners.childLifetime;
                 bullets[j].damage=5;
+                if(spawners.gravity)
+                {
+                    bullets[j].gravity=true;
+                    bullets[j].gravStrength=spawners.gravStrength;
+                    bullets[j].direction=spawners.direction;
+                }
                 break;
             }
         }
@@ -134,6 +140,11 @@ void spawnerSMaker(cJSON* move, struct fight *boss, int count)
     cJSON* delayJSON=cJSON_GetObjectItem(move,"delay");
     cJSON* maxPowerJSON=cJSON_GetObjectItem(move, "beamHeight");
     cJSON* warningJSON=cJSON_GetObjectItem(move, "warningDelay");
+
+
+    cJSON* gravityJSON=cJSON_GetObjectItem(move, "gravity");
+    cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(move, "gravity_direction");
+    cJSON* gravity_strengthJSON=cJSON_GetObjectItem(move, "gravity_stength");
     char texture[250];
     char cTexture[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
@@ -180,6 +191,40 @@ void spawnerSMaker(cJSON* move, struct fight *boss, int count)
                 case'Y':
                     boss->attacks[count].moveset.spawners[i].follow=true;
             }
+            if(gravityJSON!=NULL)
+                {
+                    char grav=gravityJSON->valuestring[0];
+                    switch(grav)
+                    {
+                        case('Y'):
+                            boss->attacks[count].moveset.spawners[i].gravity=true;
+                            boss->attacks[count].moveset.spawners[i].gravStrength=gravity_strengthJSON->valuedouble;
+                            char direc=gravity_DirectionJSON->valuestring[0];
+                            switch(direc)
+                            {
+                                case 'L':
+                                    boss->attacks[count].moveset.spawners[i].direction='L';
+                                    break;
+                                case'R':
+                                    boss->attacks[count].moveset.spawners[i].direction='R';
+                                    break;
+                                case'U':
+                                    boss->attacks[count].moveset.spawners[i].direction='U';
+                                    break;
+                                case'D':
+                                    boss->attacks[count].moveset.spawners[i].direction='D';
+                                    break;
+                            }
+                            break;
+                        case('N'):
+                            boss->attacks[count].moveset.spawners[i].gravity=false;
+
+                    }
+                }else{
+                    boss->attacks[count].moveset.spawners[i].gravity=false;
+                }
+
+
             boss->attacks[count].moveset.total++;
             break;
         }

@@ -17,6 +17,25 @@ void updateBullets(struct bullet bullets[], Sound hurty, Rectangle dest, bool* i
                 bullets[i].velocx=bullets[i].maxVecx*cos(atan2(dest.y-bullets[i].hurtbox.y,dest.x-bullets[i].hurtbox.x));
                 bullets[i].velocy=bullets[i].maxVecy*sin(atan2(dest.y-bullets[i].hurtbox.y,dest.x-bullets[i].hurtbox.x));
             }
+
+            if(bullets[i].gravity)
+            {
+                switch(bullets[i].direction)
+                {
+                    case 'L':
+                        bullets[i].velocx-=bullets[i].gravStrength;
+                        break;
+                    case'R':
+                        bullets[i].velocx+=bullets[i].gravStrength;
+                        break;
+                    case'U':
+                        bullets[i].velocy-=bullets[i].gravStrength;
+                        break;
+                    case'D':
+                        bullets[i].velocy+=bullets[i].gravStrength;
+                        break;
+                }
+            }
             bullets[i].hurtbox.x+=bullets[i].velocx;
             bullets[i].hurtbox.y+=bullets[i].velocy;
             if(CheckCollisionRecs(dest,bullets[i].hurtbox) && !(*immunity) && bullets[i].damage>0)
@@ -60,6 +79,10 @@ void bulletSMaker(cJSON *attack, struct fight *boss, int count)
     cJSON* followJSON=cJSON_GetObjectItem(attack,"follow");
     cJSON* lifetimeJSON=cJSON_GetObjectItem(attack,"lifetime");
     cJSON* delayJSON=cJSON_GetObjectItem(attack,"delay");
+
+    cJSON* gravityJSON=cJSON_GetObjectItem(attack, "gravity");
+    cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(attack, "gravity_direction");
+    cJSON* gravity_strengthJSON=cJSON_GetObjectItem(attack, "gravity_stength");
     char texture[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
     printf("MAX_BULLETS: %d\n", MAX_BULLETS);
@@ -90,6 +113,38 @@ void bulletSMaker(cJSON *attack, struct fight *boss, int count)
                 case('Y'):
                     boss->attacks[count].moveset.bullets[i].follow=true;
             }
+            if(gravityJSON!=NULL)
+            {
+                char grav=gravityJSON->valuestring[0];
+                switch(grav)
+                {
+                    case('Y'):
+                        boss->attacks[count].moveset.bullets[i].gravity=true;
+                        boss->attacks[count].moveset.bullets[i].gravStrength=gravity_strengthJSON->valueint;
+                        char direc=gravity_DirectionJSON->valuestring[0];
+                        switch(direc)
+                        {
+                            case 'L':
+                                boss->attacks[count].moveset.bullets[i].direction='L';
+                                break;
+                            case'R':
+                                boss->attacks[count].moveset.bullets[i].direction='R';
+                                break;
+                            case'U':
+                                boss->attacks[count].moveset.bullets[i].direction='U';
+                                break;
+                            case'D':
+                                boss->attacks[count].moveset.bullets[i].direction='D';
+                                break;
+                        }
+                        break;
+                    case('N'):
+                        boss->attacks[count].moveset.bullets[i].gravity=false;
+
+                }
+            }else{
+                boss->attacks[count].moveset.bullets[i].gravity=false;
+            }
             break;
         }
     }
@@ -115,6 +170,10 @@ void bulletRMaker(cJSON *move, struct fight *boss, int count)
     cJSON* followJSON=cJSON_GetObjectItem(move,"follow");
     cJSON* lifetimeJSON=cJSON_GetObjectItem(move,"lifetime");
     cJSON* delayJSON=cJSON_GetObjectItem(move,"delay");
+
+    cJSON* gravityJSON=cJSON_GetObjectItem(move, "gravity");
+    cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(move, "gravity_direction");
+    cJSON* gravity_strengthJSON=cJSON_GetObjectItem(move, "gravity_stength");
     sprintf(texture,"../images/%s",textureJSON->valuestring);
     float random=((float)rand()/RAND_MAX)*2.0f-1.0f;
     for(int z=0;z<numberJSON->valueint;z++)
@@ -154,7 +213,38 @@ void bulletRMaker(cJSON *move, struct fight *boss, int count)
                     case('Y'):
                         boss->attacks[count].moveset.bullets[i].follow=true;
                 }
-                puts("random worked");
+                if(gravityJSON!=NULL)
+                {
+                    char grav=gravityJSON->valuestring[0];
+                    switch(grav)
+                    {
+                        case('Y'):
+                            boss->attacks[count].moveset.bullets[i].gravity=true;
+                            boss->attacks[count].moveset.bullets[i].gravStrength=gravity_strengthJSON->valuedouble;
+                            char direc=gravity_DirectionJSON->valuestring[0];
+                            switch(direc)
+                            {
+                                case 'L':
+                                    boss->attacks[count].moveset.bullets[i].direction='L';
+                                    break;
+                                case'R':
+                                    boss->attacks[count].moveset.bullets[i].direction='R';
+                                    break;
+                                case'U':
+                                    boss->attacks[count].moveset.bullets[i].direction='U';
+                                    break;
+                                case'D':
+                                    boss->attacks[count].moveset.bullets[i].direction='D';
+                                    break;
+                            }
+                            break;
+                        case('N'):
+                            boss->attacks[count].moveset.bullets[i].gravity=false;
+
+                    }
+                }else{
+                    boss->attacks[count].moveset.bullets[i].gravity=false;
+                }
                 break;
             }
         }
