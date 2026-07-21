@@ -11,8 +11,9 @@
 #define DECAY_TIMER 15
 #define MAX_LINEX 100
 #define MAX_LINEY 100
-#define MAX_ATTACKS 10
+#define MAX_ATTACKS 50
 #define MAX_MOVES 100
+#define MAX_EVENTS 50
 
 
 struct bullet
@@ -49,6 +50,7 @@ struct bullet
         int maxPower;
         int delay;
         int damage;
+        int decay_timer;
         bool fired;
         bool decay;
     };
@@ -82,26 +84,6 @@ struct bullet
     void updateSpawner(struct spawner spawners[], struct beam beams[], struct bullet bullets[],Rectangle dest, Sound hurty,bool* immunity, int* health);
     void DrawSpawner(struct spawner spawners[], struct beam beams[], struct bullet bullets[], Rectangle dest, bool* immunity, int* health);
    
-    struct moves
-    {
-        struct bullet bullets[MAX_BULLETS];
-        struct beam beams[MAX_BEAMS];
-        struct spawner spawners[MAX_SPAWNERS];
-        int bulletTimer[MAX_BULLETS];
-        int beamTimer[MAX_BEAMS];
-        int spawnTimer[MAX_SPAWNERS];
-        int total;
-    };
-    struct attack
-    {
-        struct moves moveset;
-    };
-    struct fight
-    {
-        struct attack attacks[MAX_ATTACKS];
-        int currentAttack;
-    };
-    void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beams);
     struct player
     {
         bool immunity;
@@ -138,7 +120,44 @@ struct bullet
         int liney;
 
     };
+    struct moves
+    {
+        struct bullet bullets[MAX_BULLETS];
+        struct beam beams[MAX_BEAMS];
+        struct spawner spawners[MAX_SPAWNERS];
+        int bulletTimer[MAX_BULLETS];
+        int beamTimer[MAX_BEAMS];
+        int spawnTimer[MAX_SPAWNERS];
+        int total;
+    };
+    struct attack
+    {
+        struct moves moveset;
+    };
+
+    struct commands
+    {
+        struct player playa;
+        struct area plyablearea;
+        int timer;
+        int id;
+    };
+    struct event
+    {
+        struct commands orders;
+    };
+    struct fight
+    {
+        struct attack attacks[MAX_ATTACKS];
+        struct event events[MAX_EVENTS];
+        int currentAttack;
+        int currentEvent;
+    };
+    void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beams, struct spawner *spawners);
+    void updateEvent(struct fight*, struct player*, struct area*);
     void updatePlayer(struct player*, struct area*);
     void Drawplayer(struct player*);
     void updateArea(struct player*, struct area*);
     void DrawArea(struct area*);
+    void setPlayerX(struct player *player, struct area *playablearea);
+    void setPlayerY(struct player *player, struct area *playablearea);
