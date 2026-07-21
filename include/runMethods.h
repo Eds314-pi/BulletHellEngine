@@ -77,6 +77,7 @@ struct bullet
         int cont;
         int contTime;
         int damage;
+        int warning;
         bool follow;
         bool fired;
         

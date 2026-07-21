@@ -14,3 +14,4 @@ void beamLMaker(cJSON *move, struct fight *boss, int count);
 void playerModifer(cJSON *move, struct fight *boss, int count);
 void areModifier(cJSON *,struct fight* ,int count);
 void spawnerSMaker(cJSON* move, struct fight *boss, int count);
+void spawnerSeqMaker(cJSON* move, struct fight *boss, int count);

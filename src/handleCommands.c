@@ -43,6 +43,9 @@ void typeHandler(cJSON* moveset, struct fight *boss, int count)
                     case'S':
                         spawnerSMaker(move,boss,count);
                         break;
+                    case'E':
+                        spawnerSeqMaker(move,boss,count);
+                        break;
                 }
         }
         i++;
