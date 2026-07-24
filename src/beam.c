@@ -1,16 +1,18 @@
 #include "../include/runMethods.h"
 #include <cjson/cJSON.h>
 //Decay activates whenever decay timer is the only frames left is slowly dissapate beam 
-void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamCollison[],bool* immunity, int* health);
+void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamCollison[],bool* immunity, int* health, int* beamsStarted);
 void updateBeams(struct beam beams[], Sound hurty, Sound beam, Vector2 beamCollison[], bool* immunty, int* health)
 {
+    int beamsStarted=0;
     for(int i=0;i<MAX_BEAMS;i++)
     {
+        
         if(beams[i].delay==0)
         {
             if(beams[i].lifetime!=0)
             {
-                growthDecay(&beams[i], hurty, beam, beamCollison, immunty, health);
+                growthDecay(&beams[i], hurty, beam, beamCollison, immunty, health, &beamsStarted);
                 Vector2 origin = {beams[i].hurtbox.x + beams[i].pos.x,beams[i].hurtbox.y + beams[i].pos.y};
                 beams[i].pos = (Vector2){0, beams[i].hurtbox.height / 2};
                 float a = beams[i].angle * DEG2RAD;
@@ -32,6 +34,8 @@ void updateBeams(struct beam beams[], Sound hurty, Sound beam, Vector2 beamColli
                 beams[i].lifetime--;
                 if(beams[i].lifetime==0)
                 {
+                    UnloadSound(beams[i].sound);
+                    UnloadTexture(beams[i].texture);
                     beams[i]=(struct beam){0};
                 }
             }
@@ -52,7 +56,7 @@ void DrawBeams(struct beam beams[], Sound hurty, Sound beam, Vector2 beamColliso
     }
 }
 
-void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamCollison[],bool* immunity, int* health)
+void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamCollison[],bool* immunity, int* health, int* beamsStarted)
 {
     if(beams->lifetime==beams->decay_timer)
     {
@@ -61,7 +65,12 @@ void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamColliso
     //ensures sound playes once
     if(!beams->fired)
     {
-        PlaySound(beam);
+        if(*beamsStarted==0)
+        {
+            PlaySound(beams->sound);
+            (*beamsStarted)++;
+        }
+        
         beams->fired=true;
     }
     if(beams->power<beams->maxPower && !beams->decay)
@@ -103,14 +112,17 @@ void beamSMaker(cJSON *move, struct fight *boss, int count)
     cJSON* lifetimeJSON=cJSON_GetObjectItem(move,"lifetime");
     cJSON* delayJSON=cJSON_GetObjectItem(move, "delay");
     cJSON* decayJSON=cJSON_GetObjectItem(move, "decayDelay");
+    cJSON* soundJSON=cJSON_GetObjectItem(move, "sound");
     char texture[250];
+    char audio[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
-
+    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
     for(int i=0;i<MAX_BEAMS;i++)
     {
         if(boss->attacks[count].moveset.beams[i].lifetime==0)
         {
             boss->attacks[count].moveset.beams[i].texture=LoadTexture(texture);
+            boss->attacks[count].moveset.beams[i].sound=LoadSound(audio);
             boss->attacks[count].moveset.beams[i].hurtbox.x=pos_xJSON->valueint;
             boss->attacks[count].moveset.beams[i].hurtbox.y=pos_yJSON->valueint;
             boss->attacks[count].moveset.beams[i].hurtbox.width=widthJSON->valueint;
@@ -149,8 +161,11 @@ void beamLMaker(cJSON* move, struct fight *boss, int count)
     cJSON* change_angleJSON=cJSON_GetObjectItem(move,"change_angle");
     cJSON* beamtimeJSON=cJSON_GetObjectItem(move,"beam_delay");
     cJSON* decayJSON=cJSON_GetObjectItem(move, "decayDelay");
+    cJSON* soundJSON=cJSON_GetObjectItem(move, "sound");
     char texture[250];
+    char audio[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
+    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
 
     for(int z=0;z<numberJSON->valueint;z++)
     {
@@ -159,6 +174,7 @@ void beamLMaker(cJSON* move, struct fight *boss, int count)
             if(boss->attacks[count].moveset.beams[i].lifetime==0)
             {
                 boss->attacks[count].moveset.beams[i].texture=LoadTexture(texture);
+                boss->attacks[count].moveset.beams[i].sound=LoadSound(audio);
                 boss->attacks[count].moveset.beams[i].hurtbox.x=pos_xJSON->valueint+seperation_xJSON->valueint*z;
                 boss->attacks[count].moveset.beams[i].hurtbox.y=pos_yJSON->valueint+seperation_yJSON->valueint*z;
                 boss->attacks[count].moveset.beams[i].hurtbox.width=widthJSON->valueint;

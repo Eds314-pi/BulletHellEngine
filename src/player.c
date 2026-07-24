@@ -20,10 +20,14 @@ void updatePlayer(struct player *player, struct area *area)
         if(IsKeyPressed(KEY_RIGHT) && player->linex<area->linex-1) {player->linex++; player->dest.x=area->lockx[player->linex]-player->dest.width/2;}
         if(IsKeyPressed(KEY_LEFT) && player->linex>1) {player->linex--; player->dest.x=area->lockx[player->linex]-player->dest.width/2;}
     }
+
+
     player->beamCollison[0] = (Vector2){player->dest.x, player->dest.y};
     player->beamCollison[1] = (Vector2){player->dest.x + player->dest.width, player->dest.y};
     player->beamCollison[2] = (Vector2){player->dest.x, player->dest.y + player->dest.height};
     player->beamCollison[3] = (Vector2){player->dest.x + player->dest.width, player->dest.y + player->dest.height};
+    
+    
     if(player->immunity)
     {
         player->currentHealth.width=player->maxHealth.width*((double)player->health/(double)player->startHealth);
@@ -69,7 +73,9 @@ void playerModifer(cJSON *move, struct fight *boss, int count)
     cJSON* player_speedY=cJSON_GetObjectItem(move, "player_speedY");
     cJSON* freeMoveX=cJSON_GetObjectItem(move, "freeMoveX");
     cJSON* freeMoveY=cJSON_GetObjectItem(move, "freeMoveY");
+    cJSON* health=cJSON_GetObjectItem(move, "health");
     cJSON* delay=cJSON_GetObjectItem(move, "delay");
+    cJSON* soundJSON=cJSON_GetObjectItem(move,"sound");
     if(player_x!=NULL)
     {
         boss->events[boss->currentEvent].orders.playa.dest.x=player_x->valueint;
@@ -86,14 +92,14 @@ void playerModifer(cJSON *move, struct fight *boss, int count)
 
     if(player_width!=NULL)
     {
-        boss->events[boss->currentEvent].orders.playa.dest.width=player_width->valuedouble*GetScreenWidth();
+        boss->events[boss->currentEvent].orders.playa.dest.width=player_width->valuedouble*GAME_WIDTH;
     }else {
         boss->events[boss->currentEvent].orders.playa.dest.width=-1;
     }
 
     if(player_height!=NULL)
     {
-        boss->events[boss->currentEvent].orders.playa.dest.height=player_height->valuedouble*GetScreenWidth();
+        boss->events[boss->currentEvent].orders.playa.dest.height=player_height->valuedouble*GAME_HEIGHT;
     }else{
         boss->events[boss->currentEvent].orders.playa.dest.height=-1;
     }
@@ -151,6 +157,17 @@ void playerModifer(cJSON *move, struct fight *boss, int count)
         }
     }
 
+    if(soundJSON!=NULL)
+    {
+        char audio[250];
+        sprintf(audio,"../sounds/%s",soundJSON->valuestring);
+        boss->events[boss->currentEvent].orders.playa.audio=LoadSound(audio);
+    }
 
-
+    if(health!=NULL)
+    {
+        boss->events[boss->currentEvent].orders.playa.health=health->valueint;
+    }else{
+        boss->events[boss->currentEvent].orders.playa.health=-1;
+    }
 }

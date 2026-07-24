@@ -37,9 +37,12 @@ void updateSpawner(struct spawner spawners[], struct beam beams[], struct bullet
                 {
                     spawners[i].lifetime=spawners[i].contTime;
                     spawners[i].cont--;
-                    PlaySound(spawners[i].pop);
+                    PlaySound(spawners[i].sound);
                 }else
                 {
+                    PlaySound(spawners[i].sound);
+                    UnloadTexture(spawners[i].texture);
+                    UnloadSound(spawners[i].sound);
                     spawners[i]=(struct spawner){0};
                 }
                 
@@ -76,8 +79,9 @@ void spawnBullet(struct spawner spawners, struct bullet bullets[])
             if(bullets[j].lifetime==0)
             {
                 double angle=l*( (spawners.spread*M_PI/180) /spawners.behaivor);
-                bullets[j].velocx=cos(angle)*10;
-                bullets[j].velocy=sin(angle)*10;
+                angle +=spawners.initalAngle*M_PI/180;
+                bullets[j].velocx=cos(angle)*spawners.childVeloc;
+                bullets[j].velocy=sin(angle)*spawners.childVeloc;
                 bullets[j].texture=spawners.spawnTexture;
                 bullets[j].hurtbox=spawners.hurtbox;
                 bullets[j].pos=(Vector2){0,0};
@@ -101,12 +105,13 @@ void spawnBeam(struct spawner *spawners, struct beam beams[])
     {
         if(beams[j].lifetime==0)
         {
+            beams[j].sound=spawners->sound;
             beams[j].angle=spawners->spread;
             beams[j].texture=spawners->spawnTexture;
             beams[j].fired=false;
             beams[j].scource=(Rectangle){0,0,beams[j].texture.width,beams[j].texture.height};
             beams[j].lifetime=spawners->childLifetime;
-            beams[j].length=GetScreenWidth();
+            beams[j].length=GAME_WIDTH;
             beams[j].maxPower=spawners->maxPower;
             beams[j].power=0;
             beams[j].hurtbox=(Rectangle){spawners->hurtbox.x,spawners->hurtbox.y,beams[j].length,0};
@@ -140,27 +145,32 @@ void spawnerSMaker(cJSON* move, struct fight *boss, int count)
     cJSON* delayJSON=cJSON_GetObjectItem(move,"delay");
     cJSON* maxPowerJSON=cJSON_GetObjectItem(move, "beamHeight");
     cJSON* warningJSON=cJSON_GetObjectItem(move, "warningDelay");
-
+    cJSON* initalAngleJSON=cJSON_GetObjectItem(move, "initalAngle");
+    cJSON* childVelocJSON=cJSON_GetObjectItem(move,"childVeloc");
+    cJSON* soundJSON=cJSON_GetObjectItem(move, "sound");
 
     cJSON* gravityJSON=cJSON_GetObjectItem(move, "gravity");
     cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(move, "gravity_direction");
     cJSON* gravity_strengthJSON=cJSON_GetObjectItem(move, "gravity_stength");
     char texture[250];
     char cTexture[250];
+    char audio[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
     sprintf(cTexture,"../images/%s",childTextureJSON->valuestring);
+    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
     for(int i=0;i<MAX_SPAWNERS;i++)
     {
         if(boss->attacks[count].moveset.spawnTimer[i]==0)
         {
             boss->attacks[count].moveset.spawners[i].texture=LoadTexture(texture);
             boss->attacks[count].moveset.spawners[i].spawnTexture=LoadTexture(cTexture);
+            boss->attacks[count].moveset.spawners[i].sound=LoadSound(audio);
             boss->attacks[count].moveset.spawners[i].scource=(Rectangle){0,0,boss->attacks[count].moveset.spawners[i].texture.width,boss->attacks[count].moveset.spawners[i].texture.height};
             
             boss->attacks[count].moveset.spawners[i].hurtbox.x=posXJSON->valueint;
             boss->attacks[count].moveset.spawners[i].hurtbox.y=posYJSON->valueint;
-            boss->attacks[count].moveset.spawners[i].hurtbox.width=GetScreenWidth()*widthJSON->valuedouble;
-            boss->attacks[count].moveset.spawners[i].hurtbox.height=GetScreenHeight()*heightJSON->valuedouble;
+            boss->attacks[count].moveset.spawners[i].hurtbox.width=GAME_WIDTH*widthJSON->valuedouble;
+            boss->attacks[count].moveset.spawners[i].hurtbox.height=GAME_HEIGHT*heightJSON->valuedouble;
             
             boss->attacks[count].moveset.spawners[i].maxVecx=velocXJSON->valueint;
             boss->attacks[count].moveset.spawners[i].maxVecy=velocyJSON->valueint;
@@ -172,10 +182,13 @@ void spawnerSMaker(cJSON* move, struct fight *boss, int count)
             boss->attacks[count].moveset.spawners[i].childLifetime=childLifetimeJSON->valueint;
             boss->attacks[count].moveset.spawners[i].fired=false;
             boss->attacks[count].moveset.spawners[i].spread=angleJSON->valueint;
+            boss->attacks[count].moveset.spawners[i].initalAngle=initalAngleJSON->valueint;
             boss->attacks[count].moveset.spawners[i].warning=warningJSON->valueint;
             if(boss->attacks[count].moveset.spawners[i].behaivor==0)
             {
                 boss->attacks[count].moveset.spawners[i].maxPower=maxPowerJSON->valueint;
+            }else{
+                boss->attacks[count].moveset.spawners[i].childVeloc=childVelocJSON->valueint;
             }
 
             boss->attacks[count].moveset.spawners[i].lifetime=lifetimeJSON->valueint;
@@ -256,10 +269,19 @@ void spawnerSeqMaker(cJSON* move, struct fight *boss, int count)
     cJSON* countJSON=cJSON_GetObjectItem(move, "spawnerCount");
     cJSON* changeAngleJSON=cJSON_GetObjectItem(move, "changeAngle");
     cJSON* warningJSON=cJSON_GetObjectItem(move, "warningDelay");
+    cJSON* initalAngleJSON=cJSON_GetObjectItem(move, "initalAngle");
+    cJSON* childVelocJSON=cJSON_GetObjectItem(move,"childVeloc");
+    cJSON* soundJSON=cJSON_GetObjectItem(move, "sound");
+
+    cJSON* gravityJSON=cJSON_GetObjectItem(move, "gravity");
+    cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(move, "gravity_direction");
+    cJSON* gravity_strengthJSON=cJSON_GetObjectItem(move, "gravity_stength");
     char texture[250];
     char cTexture[250];
+    char audio[250];
     sprintf(texture,"../images/%s",textureJSON->valuestring);
     sprintf(cTexture,"../images/%s",childTextureJSON->valuestring);
+    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
     for(int z=0;z<countJSON->valueint;z++)
     {    
         for(int i=0;i<MAX_SPAWNERS;i++)
@@ -269,12 +291,13 @@ void spawnerSeqMaker(cJSON* move, struct fight *boss, int count)
             {
                 boss->attacks[count].moveset.spawners[i].texture=LoadTexture(texture);
                 boss->attacks[count].moveset.spawners[i].spawnTexture=LoadTexture(cTexture);
+                boss->attacks[count].moveset.spawners[i].sound=LoadSound(audio);
                 boss->attacks[count].moveset.spawners[i].scource=(Rectangle){0,0,boss->attacks[count].moveset.spawners[i].texture.width,boss->attacks[count].moveset.spawners[i].texture.height};
             
                 boss->attacks[count].moveset.spawners[i].hurtbox.x=posXJSON->valueint;
                 boss->attacks[count].moveset.spawners[i].hurtbox.y=posYJSON->valueint;
-                boss->attacks[count].moveset.spawners[i].hurtbox.width=GetScreenWidth()*widthJSON->valuedouble;
-                boss->attacks[count].moveset.spawners[i].hurtbox.height=GetScreenHeight()*heightJSON->valuedouble;
+                boss->attacks[count].moveset.spawners[i].hurtbox.width=GAME_WIDTH*widthJSON->valuedouble;
+                boss->attacks[count].moveset.spawners[i].hurtbox.height=GAME_HEIGHT*heightJSON->valuedouble;
             
                 boss->attacks[count].moveset.spawners[i].maxVecx=velocXJSON->valueint;
                 boss->attacks[count].moveset.spawners[i].maxVecy=velocyJSON->valueint;
@@ -286,11 +309,14 @@ void spawnerSeqMaker(cJSON* move, struct fight *boss, int count)
                 boss->attacks[count].moveset.spawners[i].childLifetime=childLifetimeJSON->valueint;
                 boss->attacks[count].moveset.spawners[i].fired=false;
                 boss->attacks[count].moveset.spawners[i].spread=angleJSON->valueint+(z*changeAngleJSON->valueint);
+                boss->attacks[count].moveset.spawners[i].initalAngle=initalAngleJSON->valueint;
                 boss->attacks[count].moveset.spawners[i].warning=warningJSON->valueint;
                 printf(" angle is %d",boss->attacks[count].moveset.spawners[i].spread);
                 if(boss->attacks[count].moveset.spawners[i].behaivor==0)
                 {
                     boss->attacks[count].moveset.spawners[i].maxPower=maxPowerJSON->valueint;
+                }else{
+                    boss->attacks[count].moveset.spawners[i].childVeloc=childVelocJSON->valueint;
                 }
 
                 boss->attacks[count].moveset.spawners[i].lifetime=lifetimeJSON->valueint;
@@ -305,6 +331,38 @@ void spawnerSeqMaker(cJSON* move, struct fight *boss, int count)
                         break;
                     case'Y':
                         boss->attacks[count].moveset.spawners[i].follow=true;
+                }
+                if(gravityJSON!=NULL)
+                {
+                    char grav=gravityJSON->valuestring[0];
+                    switch(grav)
+                    {
+                        case('Y'):
+                            boss->attacks[count].moveset.spawners[i].gravity=true;
+                            boss->attacks[count].moveset.spawners[i].gravStrength=gravity_strengthJSON->valuedouble;
+                            char direc=gravity_DirectionJSON->valuestring[0];
+                            switch(direc)
+                            {
+                                case 'L':
+                                    boss->attacks[count].moveset.spawners[i].direction='L';
+                                    break;
+                                case'R':
+                                    boss->attacks[count].moveset.spawners[i].direction='R';
+                                    break;
+                                case'U':
+                                    boss->attacks[count].moveset.spawners[i].direction='U';
+                                    break;
+                                case'D':
+                                    boss->attacks[count].moveset.spawners[i].direction='D';
+                                    break;
+                            }
+                            break;
+                        case('N'):
+                            boss->attacks[count].moveset.spawners[i].gravity=false;
+
+                    }
+                }else{
+                    boss->attacks[count].moveset.spawners[i].gravity=false;
                 }
                 boss->attacks[count].moveset.total++;
                 break;

@@ -14,6 +14,8 @@
 #define MAX_ATTACKS 50
 #define MAX_MOVES 100
 #define MAX_EVENTS 50
+#define GAME_WIDTH 3000
+#define GAME_HEIGHT 2000
 
 
 struct bullet
@@ -39,6 +41,7 @@ struct bullet
     struct beam
     {   
         Texture2D texture;
+        Sound sound;
         Rectangle scource;
         Vector2 pos;
         Vector2 collison[4];
@@ -63,6 +66,7 @@ struct bullet
     {
         Texture2D texture;
         Texture2D spawnTexture;
+        Sound sound;
         Vector2 pos;
         Rectangle hurtbox;
         Rectangle scource;
@@ -75,12 +79,14 @@ struct bullet
         int lifetime;
         int childLifetime;
         int spread;
+        int initalAngle;
         int behaivor;
         int maxPower;
         int cont;
         int contTime;
         int damage;
         int warning;
+        int childVeloc;
         bool follow;
         bool fired;
         bool gravity;
@@ -98,6 +104,7 @@ struct bullet
         bool swap;
 
         Texture2D texture;
+        Sound audio;
         Rectangle scource;
         Rectangle dest;
         Vector2 origin;
@@ -119,13 +126,22 @@ struct bullet
     };
     struct area
     {
-        
+        Texture2D background;
         Rectangle playable;
         int lockx[MAX_LINEX];
         int locky[MAX_LINEY];
         int linex;
         int liney;
 
+    };
+    struct background
+    {
+        Texture2D texture;
+        Color color;
+        char text[250];
+        int pos_x;
+        int pos_y;
+        int size;
     };
     struct moves
     {
@@ -142,10 +158,12 @@ struct bullet
         struct moves moveset;
     };
 
+
     struct commands
     {
         struct player playa;
         struct area plyablearea;
+        struct background background;
         int timer;
         int id;
     };
@@ -160,11 +178,13 @@ struct bullet
         int currentAttack;
         int currentEvent;
     };
+    
     void updateAttack(struct fight *fight, struct bullet *bullets, struct beam *beams, struct spawner *spawners);
-    void updateEvent(struct fight*, struct player*, struct area*);
+    void updateEvent(struct fight* boss, struct player *player, struct area *playableArea, struct background *background);
     void updatePlayer(struct player*, struct area*);
     void Drawplayer(struct player*);
     void updateArea(struct player*, struct area*);
     void DrawArea(struct area*);
+    void DrawBackground(struct background *background);
     void setPlayerX(struct player *player, struct area *playablearea);
     void setPlayerY(struct player *player, struct area *playablearea);

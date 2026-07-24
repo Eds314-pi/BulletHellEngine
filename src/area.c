@@ -32,6 +32,10 @@ void updateArea(struct player *player, struct area *area)
 }
 void DrawArea(struct area *area)
 {
+    if(area->background.id!=0)
+    {
+        DrawTexturePro(area->background,(Rectangle){0,0,area->background.width,area->background.height},(Rectangle){0,0,GAME_WIDTH,GAME_HEIGHT},(Vector2){0,0},0.0f,WHITE);
+    }
     DrawRectangleLines(area->playable.x,area->playable.y,area->playable.width,area->playable.height,WHITE);
     for(int i=0;i<area->linex;i++)
     {
@@ -52,15 +56,22 @@ void areModifier(cJSON *command,struct fight *boss ,int count)
     cJSON* line_x=cJSON_GetObjectItem(command, "line_x");
     cJSON* line_y=cJSON_GetObjectItem(command, "line_y");
     cJSON* delay=cJSON_GetObjectItem(command, "delay");
+    cJSON* background=cJSON_GetObjectItem(command, "background");
 
     boss->events[boss->currentEvent].orders.plyablearea.linex=line_x->valueint;
     boss->events[boss->currentEvent].orders.plyablearea.liney=line_y->valueint;
-    boss->events[boss->currentEvent].orders.plyablearea.playable.height=height->valuedouble*GetScreenHeight();
-    boss->events[boss->currentEvent].orders.plyablearea.playable.width=width->valuedouble*GetScreenWidth();
+    boss->events[boss->currentEvent].orders.plyablearea.playable.height=height->valuedouble*GAME_HEIGHT;
+    boss->events[boss->currentEvent].orders.plyablearea.playable.width=width->valuedouble*GAME_WIDTH;
     boss->events[boss->currentEvent].orders.plyablearea.playable.y=pos_y->valueint;
     boss->events[boss->currentEvent].orders.plyablearea.playable.x=pos_x->valueint;
     boss->events[boss->currentEvent].orders.id=2;
     boss->events[boss->currentEvent].orders.timer=delay->valueint;
+    if(background!=NULL)
+    {
+        char texture [250];
+        sprintf(texture,"../images/%s",background->valuestring);
+        boss->events[boss->currentEvent].orders.plyablearea.background=LoadTexture(texture);
+    }
 
 }
 
@@ -78,8 +89,22 @@ void setPlayerX(struct player *player, struct area *playablearea)
         }
         player->linex++;
         player->linex--;
-
-
+    }
+    bool inArea=false;
+    while(!inArea)
+    {
+        if(player->dest.x>playablearea->playable.x+playablearea->playable.width || player->dest.x<playablearea->playable.x)
+        {
+            if(player->dest.x<playablearea->playable.x)
+            {
+                player->dest.x+=playablearea->playable.x+playablearea->playable.width-player->dest.x-player->dest.width;
+            }else{
+                player->dest.x-=player->dest.x-playablearea->playable.x+playablearea->playable.width-player->dest.width;
+            }
+            
+        }else{
+            inArea=true;
+        }
     }
 }
 
@@ -98,8 +123,21 @@ void setPlayerY(struct player *player, struct area *playablearea)
         }
         player->liney--;
         player->liney++;
-
+    }
+    bool inArea=false;
+    while(!inArea)
+    {
+        if(player->dest.y>playablearea->playable.y+playablearea->playable.height || player->dest.y<playablearea->playable.y)
+        {
+            if(player->dest.y<playablearea->playable.y)
+            {
+                player->dest.y+=playablearea->playable.y+playablearea->playable.height-player->dest.y-player->dest.height;
+            }else{
+                player->dest.y-=player->dest.y-playablearea->playable.y+playablearea->playable.height-player->dest.height;
+            }
+            
+        }else{
+            inArea=true;
+        }
     }
 }
-
-

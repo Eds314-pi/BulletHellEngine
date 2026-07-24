@@ -11,7 +11,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x":750,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -26,7 +26,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x": 1150,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -41,7 +41,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x": 1550,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -56,7 +56,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x": 1950,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -81,6 +81,7 @@
             "angle": 90,
             "change_angle":0,
             "lifetime": 330,
+            "sound":"blaster.mp3",
             "delay":60,
             "beam_delay":0,
             "decayDelay":15
@@ -99,7 +100,7 @@
             "number": 100,
             "pos_x": 4100,
             "seperation_x":1000,
-            "pos_y": 1600,
+            "pos_y": 1650,
             "seperation_y":125,
             "veloc_x": -10,
             "+-veloc_x":1,
@@ -119,7 +120,7 @@
             "number": 100,
             "pos_x": -1000,
             "seperation_x":1000,
-            "pos_y": 1400,
+            "pos_y": 1450,
             "seperation_y":125,
             "veloc_x": 10,
             "+-veloc_x":1,
@@ -147,6 +148,7 @@
             "angle": 90,
             "change_angle":0,
             "lifetime": 45,
+            "sound":"blaster.mp3",
             "delay":460,
             "beam_delay":45,
             "decayDelay":5
@@ -156,7 +158,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x": 2100,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -171,7 +173,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x": 1700,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -186,7 +188,7 @@
             "type": "S",
             "texture": "Alert.png",
             "pos_x": 1300,
-            "pos_y": 1575,
+            "pos_y": 1625,
             "veloc_x": 0,
             "veloc_y": 0,
             "width": 0.08,
@@ -219,6 +221,9 @@
             "spawnerCount":4,
             "changeAngle":90,
             "warningDelay":30,
+            "gravity":"N",
+            "initalAngle":0,
+            "sound":"blaster.mp3",
             "delay":600
           },
           {
@@ -244,6 +249,9 @@
             "spawnerCount":4,
             "changeAngle":90,
             "warningDelay":30,
+            "gravity":"N",
+            "initalAngle":0,
+	    "sound":"blaster.mp3",
             "delay":600
           },
           {
@@ -269,6 +277,9 @@
             "spawnerCount":4,
             "changeAngle":90,
             "warningDelay":30,
+            "gravity":"N",
+            "initalAngle":0,
+            "sound":"blaster.mp3",
             "delay":600
           },
           {
@@ -294,6 +305,9 @@
             "spawnerCount":4,
             "changeAngle":90,
             "warningDelay":30,
+            "gravity":"N",
+            "initalAngle":0,
+            "sound":"blaster.mp3",
             "delay":600
           },
           {
@@ -319,6 +333,9 @@
             "spawnerCount":2,
             "changeAngle":180,
             "warningDelay":60,
+            "gravity":"N",
+            "initalAngle":0,
+            "sound":"blaster.mp3",
             "delay":650
           },
           {
@@ -327,7 +344,7 @@
             "texture":"Spawner.png",
             "childTexture":"Bullet.png",
             "pos_x":500,
-            "pos_y":5,
+            "pos_y":105,
             "veloc_x":5,
             "veloc_y":0,
             "width":0.025,
@@ -340,10 +357,13 @@
             "repeat_delay":30,
             "lifetime":30,
             "childLifetime":2000,
-            "warningDelay":60,
+            "warningDelay":0,
+            "initalAngle":0,
+            "childVeloc":10,
             "gravity":"Y",
             "gravity_direction":"R",
             "gravity_stength":0.05,
+            "sound":"Pop.mp3",
             "delay":1000
           },
           {
@@ -352,7 +372,7 @@
             "texture":"Spawner.png",
             "childTexture":"Bullet.png",
             "pos_x":500,
-            "pos_y":5,
+            "pos_y":105,
             "veloc_x":5,
             "veloc_y":0,
             "width":0.025,
@@ -365,10 +385,13 @@
             "repeat_delay":30,
             "lifetime":30,
             "childLifetime":2000,
-            "warningDelay":60,
+            "warningDelay":0,
+            "initalAngle":0,
+            "childVeloc":10,
             "gravity":"Y",
             "gravity_direction":"R",
             "gravity_stength":0.05,
+            "sound":"Pop.mp3",
             "delay":1100
           }
         ]
@@ -380,6 +403,16 @@
     "name":"startup",
     "commands":[
        {
+       	 "category":"D",
+       	 "texture":"Gray.png",
+       	 "text":"You are Dead",
+       	 "shade":"#8f001d",
+       	 "pos_x":500,
+       	 "pos_y":500,
+       	 "size":32
+       	 
+       },
+       {
          "category":"P",
          "texture":"Heart2.png",
          "player_x":1500,
@@ -390,6 +423,8 @@
          "player_speedY":10,
          "freeMoveX":"Y",
          "freeMoveY":"Y",
+         "sound":"hurt.mp3",
+         "health":10,
          "delay":0
       },
       {
@@ -415,6 +450,16 @@
       	"freeMoveX":"Y",
         "freeMoveY":"Y",
         "delay":1100
+      },
+      {
+        "category":"A",
+      	"pos_x":0,
+      	"pos_y":500,
+      	"width":1,
+      	"height":0.2,
+      	"line_x":10,
+      	"line_y":10,
+      	"delay":1600
       }
      ]
     }

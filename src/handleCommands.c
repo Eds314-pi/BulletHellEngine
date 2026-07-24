@@ -5,7 +5,7 @@ void typeHandler(cJSON* moveset, struct fight *boss, int count)
 {
     cJSON* moves = cJSON_GetObjectItem(moveset, "moves");
     cJSON* move;
-    int i=0;
+    //int i=0;
     int j=0;
     cJSON_ArrayForEach(move,moves)
     {
@@ -48,7 +48,7 @@ void typeHandler(cJSON* moveset, struct fight *boss, int count)
                         break;
                 }
         }
-        i++;
+        //i++;
     }
 }
 void commandHandler(cJSON* commands,struct fight *boss, int count)
@@ -71,6 +71,11 @@ cJSON_ArrayForEach(command, commands)
             areModifier(command,boss,count);
             boss->currentEvent++;
             break;
+        case'D':
+            backgroundModifier(command,boss, count);
+            boss->currentEvent++;
+            break;
+            
     }
 }
 }

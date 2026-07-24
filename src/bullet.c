@@ -94,8 +94,8 @@ void bulletSMaker(cJSON *attack, struct fight *boss, int count)
             boss->attacks[count].moveset.bullets[i].texture=LoadTexture(texture);
             boss->attacks[count].moveset.bullets[i].hurtbox.x=posXJSON->valueint;
             boss->attacks[count].moveset.bullets[i].hurtbox.y=posYJSON->valueint;
-            boss->attacks[count].moveset.bullets[i].hurtbox.width=GetScreenWidth()*widthJSON->valuedouble;
-            boss->attacks[count].moveset.bullets[i].hurtbox.height=GetScreenHeight()*heightJSON->valuedouble;
+            boss->attacks[count].moveset.bullets[i].hurtbox.width=GAME_WIDTH*widthJSON->valuedouble;
+            boss->attacks[count].moveset.bullets[i].hurtbox.height=GAME_HEIGHT*heightJSON->valuedouble;
             boss->attacks[count].moveset.bullets[i].maxVecx=velocXJSON->valueint;
             boss->attacks[count].moveset.bullets[i].maxVecy=velocyJSON->valueint;
             boss->attacks[count].moveset.bullets[i].damage=damageJSON->valueint;
@@ -191,8 +191,8 @@ void bulletRMaker(cJSON *move, struct fight *boss, int count)
                 boss->attacks[count].moveset.bullets[i].hurtbox.y=pos_yJSON->valueint+seperation_yJSON->valuedouble*random;
                 random=((float)rand()/RAND_MAX)*2.0f-1.0f;
 
-                boss->attacks[count].moveset.bullets[i].hurtbox.width=GetScreenWidth()*widthJSON->valuedouble;
-                boss->attacks[count].moveset.bullets[i].hurtbox.height=GetScreenHeight()*heightJSON->valuedouble;
+                boss->attacks[count].moveset.bullets[i].hurtbox.width=GAME_WIDTH*widthJSON->valuedouble;
+                boss->attacks[count].moveset.bullets[i].hurtbox.height=GAME_HEIGHT*heightJSON->valuedouble;
 
                 boss->attacks[count].moveset.bullets[i].maxVecx=veloc_xJSON->valueint+varveloc_xJSON->valuedouble*random;
                 random=((float)rand()/RAND_MAX)*2.0f-1.0f;

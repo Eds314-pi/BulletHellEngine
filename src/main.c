@@ -6,18 +6,19 @@ int main(int argc, char* argv[])
     InitWindow(800, 600, "");
     ToggleFullscreen();
     //SetWindowSize(monitorw, monitorh);
-    int ScreenWidth=GetScreenWidth();
-    int ScreenHeight=GetScreenHeight();
+    int ScreenWidth=GAME_WIDTH;
+    int ScreenHeight=GAME_HEIGHT;
     InitAudioDevice();
     SetTargetFPS(60);               
-    Sound hurty=LoadSound("../sounds/hurt.mp3");
+    //Sound hurty=LoadSound("../sounds/hurt.mp3");
     Sound beam=LoadSound("../sounds/blaster.mp3");
-
+    RenderTexture2D target=LoadRenderTexture(GAME_WIDTH,GAME_HEIGHT);
     static struct fight boss;
     struct bullet bullets[MAX_BULLETS]={0};
     struct beam beams[MAX_BEAMS]={0};
     struct spawner spawners[MAX_SPAWNERS]={0};
-    struct area playableArea;
+    struct area playableArea= {0};
+    struct background background= {0};
     
     playableArea.playable=(Rectangle){ScreenWidth/4,(int)(ScreenHeight/1.5),ScreenWidth/2,ScreenHeight/4};
     playableArea.linex=4;
@@ -58,36 +59,34 @@ int main(int argc, char* argv[])
         if(player.health>0)updateAttack(&boss, bullets, beams, spawners);
         if(player.health>0)updateArea(&player,&playableArea);
         if(player.health>0)updatePlayer(&player, &playableArea);
-        if(player.health>0)updateBullets(bullets,hurty,player.dest, &player.immunity,&player.health);
-        if(player.health>0)updateBeams(beams,hurty,beam,player.beamCollison,&player.immunity,&player.health);
-        if(player.health>0)updateSpawner(spawners,beams,bullets, player.dest, hurty,&player.immunity, &player.health);
-        if(player.health>0)updateEvent(&boss, &player, &playableArea);
+        if(player.health>0)updateBullets(bullets,player.audio,player.dest, &player.immunity,&player.health);
+        if(player.health>0)updateBeams(beams,player.audio,beam,player.beamCollison,&player.immunity,&player.health);
+        if(player.health>0)updateSpawner(spawners,beams,bullets, player.dest, player.audio,&player.immunity, &player.health);
+        if(player.health>0)updateEvent(&boss, &player, &playableArea, &background);
         if(player.health<=0)
         {
             player.gameOver=true;
         }
-        BeginDrawing();
+        BeginTextureMode(target);
         if(!player.gameOver)
-            {
-                ClearBackground(BLACK);
-                Drawplayer(&player);
-                DrawArea(&playableArea);
-                DrawBullets(bullets,hurty,player.dest, &player.immunity,&player.health);
-                DrawBeams(beams,hurty,beam,player.beamCollison,&player.immunity,&player.health);
-                DrawSpawner(spawners,beams,bullets, player.dest, &player.immunity, &player.health);
-            }else{
-                ClearBackground(BLACK);
-            }
-            
-
-
-        EndDrawing();
+        {
+            ClearBackground(BLACK);
+            DrawArea(&playableArea);
+            Drawplayer(&player);
+            DrawBullets(bullets,player.audio,player.dest, &player.immunity,&player.health);
+            DrawBeams(beams,player.audio,beam,player.beamCollison,&player.immunity,&player.health);
+            DrawSpawner(spawners,beams,bullets, player.dest, &player.immunity, &player.health);
+        }else{
+            DrawBackground(&background);
+        }
+            EndTextureMode();
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawTexturePro(target.texture,(Rectangle){0, 0, GAME_WIDTH, -GAME_HEIGHT},(Rectangle){0, 0, GetScreenWidth(), GetScreenHeight()},(Vector2){0,0},0,WHITE);
+            EndDrawing();
         
     }
-    UnloadSound(spawners[0].pop);
-    UnloadSound(spawners[1].pop);
-    UnloadSound(hurty);
-    UnloadSound(beam);
+    UnloadSound(player.audio);
     CloseAudioDevice();
     CloseWindow();        
     return 0;
