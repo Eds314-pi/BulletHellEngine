@@ -14,8 +14,8 @@
 #define MAX_ATTACKS 50
 #define MAX_MOVES 100
 #define MAX_EVENTS 50
-#define GAME_WIDTH 3000
-#define GAME_HEIGHT 2000
+#define GAME_WIDTH 3072
+#define GAME_HEIGHT 1920
 
 
 struct bullet
