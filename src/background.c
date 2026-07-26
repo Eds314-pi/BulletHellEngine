@@ -6,7 +6,7 @@ void DrawBackground(struct background *background)
     Rectangle src=(Rectangle){0,0,background->texture.width,background->texture.height};
     Rectangle dest=(Rectangle){0,0,GAME_WIDTH,GAME_HEIGHT};
     DrawTexturePro(background->texture,src,dest,(Vector2){0,0},0.0f,WHITE);
-    DrawText(background->text,background->pos_x,background->pos_y,background->size,RED);
+    DrawText(background->text,background->pos_x,background->pos_y,background->size,background->color);
 }
 void backgroundModifier(cJSON* move, struct fight* boss, int count)
 {

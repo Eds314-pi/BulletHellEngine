@@ -1,19 +1,15 @@
 #include "../include/runMethods.h"
 #include "../include/readFile.h"
-int main(int argc, char* argv[])
+int gameplay(char* argv, bool* playing)
 {
-    char* fileName=argv[1];
-    InitWindow(800, 600, "");
-    ToggleFullscreen();
+    char* fileName=argv;
     //SetWindowSize(monitorw, monitorh);
     int ScreenWidth=GAME_WIDTH;
     int ScreenHeight=GAME_HEIGHT;
-    InitAudioDevice();
-    SetTargetFPS(60);               
     //Sound hurty=LoadSound("../sounds/hurt.mp3");
     Sound beam=LoadSound("../sounds/blaster.mp3");
     RenderTexture2D target=LoadRenderTexture(GAME_WIDTH,GAME_HEIGHT);
-    static struct fight boss;
+    struct fight *boss = calloc(1, sizeof(struct fight));
     struct bullet bullets[MAX_BULLETS]={0};
     struct beam beams[MAX_BEAMS]={0};
     struct spawner spawners[MAX_SPAWNERS]={0};
@@ -52,17 +48,22 @@ int main(int argc, char* argv[])
     player.freeMoveY=true;
     player.linex=1;
     player.liney=1;
-    openFile(fileName,&boss);
+    openFile(fileName,boss);
     
     while (!WindowShouldClose())    
     {
-        if(player.health>0)updateAttack(&boss, bullets, beams, spawners);
+        if(IsKeyPressed(KEY_TAB))
+        {
+            *playing=false;
+            break;
+        }
+        if(player.health>0)updateAttack(boss, bullets, beams, spawners);
         if(player.health>0)updateArea(&player,&playableArea);
         if(player.health>0)updatePlayer(&player, &playableArea);
         if(player.health>0)updateBullets(bullets,player.audio,player.dest, &player.immunity,&player.health);
         if(player.health>0)updateBeams(beams,player.audio,beam,player.beamCollison,&player.immunity,&player.health);
         if(player.health>0)updateSpawner(spawners,beams,bullets, player.dest, player.audio,&player.immunity, &player.health);
-        if(player.health>0)updateEvent(&boss, &player, &playableArea, &background);
+        if(player.health>0)updateEvent(boss, &player, &playableArea, &background);
         if(player.health<=0)
         {
             player.gameOver=true;
@@ -86,8 +87,7 @@ int main(int argc, char* argv[])
             EndDrawing();
         
     }
-    UnloadSound(player.audio);
-    CloseAudioDevice();
-    CloseWindow();        
+    UnloadSound(player.audio);  
+    *playing=false;
     return 0;
 }
