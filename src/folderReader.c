@@ -1,6 +1,6 @@
 #include "../include/FolderReader.h"
-#define GAME_WIDTH 3072
-#define GAME_HEIGHT 1920
+#define GAME_WIDTH 800
+#define GAME_HEIGHT 600
 struct fileList readFightFiles()
 {
     DIR *folder;
@@ -19,6 +19,10 @@ struct fileList readFightFiles()
         {
             strcpy(list.fileName[list.count], entry->d_name);
             list.count++;
+            if(list.count==MAX_FILES)
+            {
+                break;
+            }
         }
         
     }
@@ -28,10 +32,10 @@ struct fileList readFightFiles()
     {
         int column= GAME_HEIGHT*i/25;
         int row;
-        if(i>=25)
+        if(i>25)
         {
-            row= 650*(i/25);
-            column= GAME_HEIGHT*(i%25)/25 + 70;
+            row= 320*(i/25);
+            column= GAME_HEIGHT*(i%25)/25;
             list.colPos[i]=column;
             list.rowPos[i]=row;
         }else{
@@ -48,6 +52,6 @@ void drawFileList(struct fileList* list)
 {
     for(int i=1;i<list->count;i++)
     {
-        DrawText(list->fileName[i],list->rowPos[i],list->colPos[i],50,WHITE);
+        DrawText(list->fileName[i],list->rowPos[i],list->colPos[i],25,WHITE);
     }
 }

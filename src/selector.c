@@ -6,10 +6,10 @@ struct Selector InitalizeSelector(struct fileList* list)
     selector.list=*list;
     selector.position=(Rectangle)
     {
-        list->rowPos[1]-60,
+        list->rowPos[1]-20,
         list->colPos[1],
-        50,
-        50
+        15,
+        15
         
     };
     selector.text=LoadTexture("../images/Selector.png");
@@ -30,7 +30,7 @@ void updateSelector(struct Selector* selector)
         {
             selector->index=1;
         }
-        selector->position.x=selector->list.rowPos[selector->index]-60;
+        selector->position.x=selector->list.rowPos[selector->index]-20;
         selector->position.y=selector->list.colPos[selector->index];
     }
     if(IsKeyPressed(KEY_UP))
@@ -43,8 +43,9 @@ void updateSelector(struct Selector* selector)
         {
             selector->index=selector->list.count-1;
         }
-        selector->position.x=selector->list.rowPos[selector->index]-60;
+        selector->position.x=selector->list.rowPos[selector->index]-20;
         selector->position.y=selector->list.colPos[selector->index];
+        printf("%f\n",selector->position.y);
     }
     if(IsKeyPressed(KEY_RIGHT))
     {

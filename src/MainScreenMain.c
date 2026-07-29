@@ -13,38 +13,35 @@ int main(int argc, char* argv[])
     
     struct fileList list=readFightFiles();
     struct Selector selector=InitalizeSelector(&list);
-
-
-    for(int i = 1; i < list.count; i++)
-    {
-        printf("%s\n", list.fileName[i]);
-    }
-
-
-    int debugX=0;
+    struct Splash background=setScreen();
     while(!WindowShouldClose())
     {
         BeginTextureMode(target);
-        ClearBackground(BLACK);
         if(!playing)
         {
-            updateSelector(&selector);
-            drawSelector(&selector);
-            drawFileList(&list);
+            if(background.done)
+            {
+                ClearBackground(BLACK);
+                if(!playing)
+                {
+                    updateSelector(&selector);
+                    drawSelector(&selector);
+                    drawFileList(&list);
+                }
+                if(selector.gameStart)
+                {
+                    selector.gameStart=false;
+                    playing=true;
+                    gameplay(list.fileName[selector.index],&playing);
+                    background.done=false;
+                }   
+            }else{
+                ClearBackground(BLACK);
+                drawScreen(&background,GAME_WIDTH,GAME_HEIGHT);
+            
+            }
         }
-
-
-
-
-        if(selector.gameStart)
-        {
-            selector.gameStart=false;
-            playing=true;
-            gameplay(list.fileName[selector.index],&playing);
-        }   
-        //debugX++;
-
-
+        
 
 
 

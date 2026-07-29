@@ -1,5 +1,5 @@
 #include "3rdPartyIncludes.h"
-#define MAX_FILES 100
+#define MAX_FILES 50
 #define MAX_FILELENGTH 256
 
 struct fileList

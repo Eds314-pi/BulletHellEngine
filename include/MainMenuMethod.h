@@ -1,8 +1,8 @@
 #include "../include/3rdPartyIncludes.h"
 #include "Selector.h"
-
-#define GAME_WIDTH 3072
-#define GAME_HEIGHT 1920
+#include "SplashScreen.h"
+#define GAME_WIDTH 800
+#define GAME_HEIGHT 600
 
 struct fileList readFightFiles();
 void drawFileList(struct fileList*);

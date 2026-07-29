@@ -11,8 +11,8 @@
 
 
 
-#define GAME_WIDTH 3072
-#define GAME_HEIGHT 1920
+#define GAME_WIDTH 800
+#define GAME_HEIGHT 600
 void DrawBullets(struct bullet bullets[], Sound, Rectangle, bool*, int* health);
 void updateBullets(struct bullet bullets[], Sound, Rectangle, bool*, int* health);
 void updateBeams(struct beam beams[], Sound hurty, Sound beam, Vector2 beamCollison[4], bool* immunty, int* health);
