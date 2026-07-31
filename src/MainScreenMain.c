@@ -1,8 +1,11 @@
 #include "../include/runMethods.h"
 #include "../include/MainMenuMethod.h"
+#include "rlgl.h"
 int main(int argc, char* argv[])
 {
-    InitWindow(600,800,"Main Menu");
+    system("pythong3 button.py &");
+
+    InitWindow(800,600,"Main Menu");
     RenderTexture2D target=LoadRenderTexture(GAME_WIDTH,GAME_HEIGHT);
     ToggleFullscreen();
     int ScreenWidth=GAME_WIDTH;

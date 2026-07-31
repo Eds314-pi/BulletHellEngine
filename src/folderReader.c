@@ -1,6 +1,6 @@
 #include "../include/FolderReader.h"
 #define GAME_WIDTH 800
-#define GAME_HEIGHT 480
+#define GAME_HEIGHT 600
 struct fileList readFightFiles()
 {
     DIR *folder;
