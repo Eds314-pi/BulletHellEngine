@@ -9,9 +9,10 @@ keyboard=Controller()
 def pressed():
     print("THE BUTTON HAS WORKED")
     keyboard.press(Key.up)
-    time.sleep(0.05)
-    keyboard.release(Key.up)
-
+def released():
+	print("THE BUTTON HAS RELEASED")
+	keyboard.release(Key.up)
 button.when_pressed= pressed
+button.when_released=released
 pause()
 
