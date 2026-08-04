@@ -17,16 +17,16 @@ def released0():
 	keyboard.release(Key.up)
 def pressed1():
     print("THE BUTTON HAS WORKED")
-    keyboard.press(Key.left)
+    keyboard.press(Key.right)
 def released1():
 	print("THE BUTTON HAS RELEASED")
-	keyboard.release(Key.left)
+	keyboard.release(Key.right)
 def pressed2():
     print("THE BUTTON HAS WORKED")
-    keyboard.press(Key.right)
+    keyboard.press(Key.left)
 def released2():
 	print("THE BUTTON HAS RELEASED")
-	keyboard.release(Key.right)
+	keyboard.release(Key.left)
 def pressed3():
     print("THE BUTTON HAS WORKED")
     keyboard.press(Key.down)
