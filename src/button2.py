@@ -36,7 +36,7 @@ def released3():
 	print("THE BUTTON HAS RELEASED")
 	keyboard.release(Key.down)
 def pressed4():
-    keyboard.press(Jey.tab)
+    keyboard.press(Key.tab)
     time.sleep(.05)
     keybaord.release(Key.tab)
 button0.when_pressed= pressed0
