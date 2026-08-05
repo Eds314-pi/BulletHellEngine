@@ -38,7 +38,7 @@ def released3():
 def pressed4():
     keyboard.press(Key.tab)
     time.sleep(.05)
-    keybaord.release(Key.tab)
+    keyboard.release(Key.tab)
 button0.when_pressed= pressed0
 button0.when_released=released0
 button1.when_pressed= pressed1
