@@ -7,6 +7,8 @@ button0=Button(26, pull_up=True)
 button1=Button(13, pull_up=True)
 button2=Button(6, pull_up=True)
 button3=Button(5, pull_up=True)
+button4=Button(12, pull_up=True)
+
 keyboard=Controller()
 
 def pressed0():
@@ -33,7 +35,10 @@ def pressed3():
 def released3():
 	print("THE BUTTON HAS RELEASED")
 	keyboard.release(Key.down)
-
+def pressed4():
+    keyboard.press(Jey.tab)
+    time.sleep(.05)
+    keybaord.release(Key.tab)
 button0.when_pressed= pressed0
 button0.when_released=released0
 button1.when_pressed= pressed1
@@ -42,5 +47,6 @@ button2.when_pressed= pressed2
 button2.when_released=released2
 button3.when_pressed= pressed3
 button3.when_released=released3
+button4.when_pressed=pressed4
 pause()
 
