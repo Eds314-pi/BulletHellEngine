@@ -3,7 +3,7 @@
 #include "rlgl.h"
 int main(int argc, char* argv[])
 {
-    system("/usr/bin/python3 button2.py & echo $! > /tmp/button.pid");
+    //system("/usr/bin/python3 button2.py & echo $! > /tmp/button.pid");
 
     InitWindow(800,600,"Main Menu");
     RenderTexture2D target=LoadRenderTexture(GAME_WIDTH,GAME_HEIGHT);
@@ -55,8 +55,8 @@ int main(int argc, char* argv[])
         EndDrawing();
     }
     
-    system("kill $(cat /tmp/button.pid)");
-    system("rm /tmp/button.pid");
+    //system("kill $(cat /tmp/button.pid)");
+    //system("rm /tmp/button.pid");
     CloseAudioDevice();
     CloseWindow();        
 }
