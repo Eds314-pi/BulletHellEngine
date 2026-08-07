@@ -81,7 +81,7 @@ char * findUSB(char* path)
         if (entry->d_name[0] == '.')
             continue;
 
-        snprintf(path,PATH_MAX,"media/%s",entry->d_name);
+        snprintf(path,PATH_MAX,"/media/%s",entry->d_name);
         list_directory(path);
     }
     closedir(dir);
