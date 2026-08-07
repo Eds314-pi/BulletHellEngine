@@ -10,4 +10,6 @@ struct fileList
     int rowPos[MAX_FILES];
 };
 void assignFile(struct fileList*);
+char* list_directory(char *path);
+char* findUSB(char* path);
 

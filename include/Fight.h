@@ -41,6 +41,7 @@ struct fight
     int currentAttack;
     int currentEvent;
     bool finished;
+    char path[PATH_MAX];
 };
 
 //Fight is the top layer which contains attacks and events

@@ -34,4 +34,4 @@ void DrawArea(struct area*);
 void DrawBackground(struct background *background);
 void setPlayerX(struct player *player, struct area *playablearea);
 void setPlayerY(struct player *player, struct area *playablearea);
-int gameplay(char* argv, bool*);
+int gameplay(char* argv, bool*, char*);
