@@ -155,9 +155,9 @@ void spawnerSMaker(cJSON* move, struct fight *boss, int count)
     char texture[250];
     char cTexture[250];
     char audio[250];
-    sprintf(texture,"../images/%s",textureJSON->valuestring);
-    sprintf(cTexture,"../images/%s",childTextureJSON->valuestring);
-    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
+    sprintf(texture,"%s/images/%s",boss->path,textureJSON->valuestring);
+    sprintf(cTexture,"%s/images/%s",boss->path,childTextureJSON->valuestring);
+    sprintf(audio,"%s/sounds/%s",boss->path,soundJSON->valuestring);
     for(int i=0;i<MAX_SPAWNERS;i++)
     {
         if(boss->attacks[count].moveset.spawnTimer[i]==0)

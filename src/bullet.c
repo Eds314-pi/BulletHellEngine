@@ -84,7 +84,7 @@ void bulletSMaker(cJSON *attack, struct fight *boss, int count)
     cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(attack, "gravity_direction");
     cJSON* gravity_strengthJSON=cJSON_GetObjectItem(attack, "gravity_stength");
     char texture[250];
-    sprintf(texture,"../images/%s",textureJSON->valuestring);
+    sprintf(texture,"%s/images/%s",boss->path,textureJSON->valuestring);
     printf("MAX_BULLETS: %d\n", MAX_BULLETS);
     for(int i=0;i<MAX_BULLETS;i++)
     {
@@ -174,7 +174,7 @@ void bulletRMaker(cJSON *move, struct fight *boss, int count)
     cJSON* gravityJSON=cJSON_GetObjectItem(move, "gravity");
     cJSON* gravity_DirectionJSON=cJSON_GetObjectItem(move, "gravity_direction");
     cJSON* gravity_strengthJSON=cJSON_GetObjectItem(move, "gravity_stength");
-    sprintf(texture,"../images/%s",textureJSON->valuestring);
+    sprintf(texture,"%s/images/%s",boss->path,textureJSON->valuestring);
     float random=((float)rand()/RAND_MAX)*2.0f-1.0f;
     for(int z=0;z<numberJSON->valueint;z++)
     {

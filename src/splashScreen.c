@@ -12,7 +12,7 @@ void drawScreen(struct Splash* background, int gameWidth, int gameHeight)
 {
     DrawTexturePro(background->text,
         background->src,
-        (Rectangle){100,100,gameWidth/3 ,gameHeight/3},
+        (Rectangle){275,200,gameWidth/3 ,gameHeight/3},
         (Vector2){0,0},
         0.0f,
         WHITE);

@@ -13,8 +13,8 @@ int main(int argc, char* argv[])
     InitAudioDevice();
     SetTargetFPS(60);               
     bool playing=false;
-    
-    struct fileList list=readFightFiles();
+    char path [PATH_MAX];
+    struct fileList list=readFightFiles(path);
     struct Selector selector=InitalizeSelector(&list);
     struct Splash background=setScreen();
     while(!WindowShouldClose())
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
                 {
                     selector.gameStart=false;
                     playing=true;
-                    gameplay(list.fileName[selector.index],&playing);
+                    gameplay(list.fileName[selector.index],&playing, path);
                     background.done=false;
                 }   
             }else{

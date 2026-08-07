@@ -1,6 +1,6 @@
 #include "../include/runMethods.h"
 #include "../include/readFile.h"
-int gameplay(char* argv, bool* playing)
+int gameplay(char* argv, bool* playing, char* path)
 {
     char* fileName=argv;
     //SetWindowSize(monitorw, monitorh);
@@ -10,6 +10,7 @@ int gameplay(char* argv, bool* playing)
     Sound beam=LoadSound("../sounds/blaster.mp3");
     RenderTexture2D target=LoadRenderTexture(GAME_WIDTH,GAME_HEIGHT);
     struct fight *boss = calloc(1, sizeof(struct fight));
+    strcpy(boss->path,path);
     struct bullet bullets[MAX_BULLETS]={0};
     struct beam beams[MAX_BEAMS]={0};
     struct spawner spawners[MAX_SPAWNERS]={0};
