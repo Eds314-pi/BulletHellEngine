@@ -19,7 +19,7 @@ void backgroundModifier(cJSON* move, struct fight* boss, int count)
     cJSON* text_yJSON=cJSON_GetObjectItem(move, "pos_y");
     cJSON* sizeJSON=cJSON_GetObjectItem(move, "size");
     char text [250];
-    sprintf(text,"%s/images/%s",boss->path,textureJSON->valuestring);
+    sprintf(text,"../images/%s",textureJSON->valuestring);
     boss->events[boss->currentEvent].orders.background.texture=LoadTexture(text);
     strcpy(boss->events[boss->currentEvent].orders.background.text,textJSON->valuestring);
     boss->events[boss->currentEvent].orders.background.pos_x=text_xJSON->valueint;

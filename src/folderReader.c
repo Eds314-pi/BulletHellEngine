@@ -7,14 +7,7 @@ struct fileList readFightFiles(char *path)
     struct dirent *entry;
     struct fileList list={0};
     list.count=1;
-    //printf("Before listing media\n");
-    //findUSB();
-    //printf("After listing media\n");
-
-    findUSB(path);
-    char fight[PATH_MAX];
-    snprintf(fight,PATH_MAX,"%s/fights",path);
-    folder=opendir(fight);
+    folder=opendir("../fights");
     
     if(folder==NULL)
     {
@@ -64,50 +57,4 @@ void drawFileList(struct fileList* list)
     }
 }
 
-
-char * findUSB(char* path)
-{
-    DIR *dir = opendir("/run/media");
-
-    if (!dir)
-    {
-        perror("/run/media");
-        return NULL;
-    }
-
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != NULL)
-    {
-        if (entry->d_name[0] == '.')
-            continue;
-
-        snprintf(path,PATH_MAX,"/run/media/%s",entry->d_name);
-        list_directory(path);
-    }
-    closedir(dir);
-    return path;
-}
-char * list_directory(char *path) {
-    DIR *dir = opendir(path);
-
-    if (dir == NULL) {
-        perror("opendir");
-        return NULL;
-    }
-
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != NULL) {
-        if (strcmp(entry->d_name, ".") != 0 &&
-            strcmp(entry->d_name, "..") != 0) {
-            printf("%s/%s\n", path, entry->d_name);
-            
-            
-            strncat(path, "/", PATH_MAX - strlen(path) - 1);
-            strncat(path, entry->d_name, PATH_MAX - strlen(path) - 1);
-        }
-    }
-
-    closedir(dir);
-    return path;
-}
 

@@ -69,7 +69,7 @@ void areModifier(cJSON *command,struct fight *boss ,int count)
     if(background!=NULL)
     {
         char texture [250];
-        sprintf(texture,"%s/images/%s",boss->path,background->valuestring);
+        sprintf(texture,"../images/%s",background->valuestring);
         boss->events[boss->currentEvent].orders.plyablearea.background=LoadTexture(texture);
     }
 

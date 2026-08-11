@@ -115,8 +115,8 @@ void beamSMaker(cJSON *move, struct fight *boss, int count)
     cJSON* soundJSON=cJSON_GetObjectItem(move, "sound");
     char texture[250];
     char audio[250];
-    sprintf(texture,"%s/images/%s",boss->path,textureJSON->valuestring);
-    sprintf(audio,"%s/sounds/%s",boss->path,soundJSON->valuestring);
+    sprintf(texture,"../images/%s",textureJSON->valuestring);
+    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
     for(int i=0;i<MAX_BEAMS;i++)
     {
         if(boss->attacks[count].moveset.beams[i].lifetime==0)
@@ -164,8 +164,8 @@ void beamLMaker(cJSON* move, struct fight *boss, int count)
     cJSON* soundJSON=cJSON_GetObjectItem(move, "sound");
     char texture[250];
     char audio[250];
-    sprintf(texture,"%s/images/%s",boss->path,textureJSON->valuestring);
-    sprintf(audio,"%s/sounds/%s",boss->path,soundJSON->valuestring);
+    sprintf(texture,"../images/%s",textureJSON->valuestring);
+    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
     for(int z=0;z<numberJSON->valueint;z++)
     {
         for(int i=0;i<MAX_BEAMS;i++)
