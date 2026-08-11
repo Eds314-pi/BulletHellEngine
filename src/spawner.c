@@ -279,9 +279,9 @@ void spawnerSeqMaker(cJSON* move, struct fight *boss, int count)
     char texture[250];
     char cTexture[250];
     char audio[250];
-    sprintf(texture,"../images/%s",textureJSON->valuestring);
-    sprintf(cTexture,"../images/%s",childTextureJSON->valuestring);
-    sprintf(audio,"../sounds/%s",soundJSON->valuestring);
+    sprintf(texture,"%s/images/%s",textureJSON->valuestring);
+    sprintf(cTexture,"%s/images/%s",childTextureJSON->valuestring);
+    sprintf(audio,"%s/sounds/%s",soundJSON->valuestring);
     for(int z=0;z<countJSON->valueint;z++)
     {    
         for(int i=0;i<MAX_SPAWNERS;i++)
