@@ -87,7 +87,7 @@ void spawnBullet(struct spawner spawners, struct bullet bullets[])
                 bullets[j].pos=(Vector2){0,0};
                 bullets[j].scource=(Rectangle){0,0,bullets[j].texture.width,bullets[j].texture.height};
                 bullets[j].lifetime=spawners.childLifetime;
-                bullets[j].damage=5;
+                bullets[j].damage=spawners.damage;
                 if(spawners.gravity)
                 {
                     bullets[j].gravity=true;
@@ -117,7 +117,7 @@ void spawnBeam(struct spawner *spawners, struct beam beams[])
             beams[j].hurtbox=(Rectangle){spawners->hurtbox.x,spawners->hurtbox.y,beams[j].length,0};
             beams[j].pos=(Vector2){0,beams[j].power/2};
             beams[j].decay=false;
-            beams[j].damage=5;
+            beams[j].damage=spawners->damage;
             beams[j].decay_timer=30;
             *spawners=(struct spawner){0};
         }

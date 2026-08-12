@@ -1,0 +1,368 @@
+{
+  "name": "Example fight",
+  "attackcount": 2,
+  "attacks": [
+    {
+      "name": "Opening",
+      "moveset": {
+        "moves": [
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":-10,
+            "pos_y": 315,
+            "veloc_x": 4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 2,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 10
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "BulletFriendly.png",
+            "pos_x":-10,
+            "pos_y": 390,
+            "veloc_x": 4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 10
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":-10,
+            "pos_y": 465,
+            "veloc_x": 4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 2,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 10
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":800,
+            "pos_y": 315,
+            "veloc_x": -4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 2,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 120
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":800,
+            "pos_y": 390,
+            "veloc_x": -4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 2,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 120
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "BulletFriendly.png",
+            "pos_x":800,
+            "pos_y": 465,
+            "veloc_x": -4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 120
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "BulletFriendly.png",
+            "pos_x":0,
+            "pos_y": 390,
+            "veloc_x": 4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 140
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":0,
+            "pos_y": 315,
+            "veloc_x": 4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 2,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 140
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":0,
+            "pos_y": 465,
+            "veloc_x": 4,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 2,
+            "follow": "N",
+            "lifetime": 360,
+            "delay": 140
+          }
+        ]
+      }
+    },
+    {
+      "name": "Second Attack",
+      "moveset": {
+        "moves": [
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Alert.png",
+            "pos_x":200,
+            "pos_y": 525,
+            "veloc_x": 0,
+            "veloc_y": 0,
+            "width": 0.5,
+            "height": 0.04,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 45,
+            "delay": 250
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Alert.png",
+            "pos_x":200,
+            "pos_y": 475,
+            "veloc_x": 0,
+            "veloc_y": 0,
+            "width": 0.5,
+            "height": 0.04,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 45,
+            "delay": 295
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Alert.png",
+            "pos_x":200,
+            "pos_y": 425,
+            "veloc_x": 0,
+            "veloc_y": 0,
+            "width": 0.5,
+            "height": 0.04,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 45,
+            "delay": 345
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Alert.png",
+            "pos_x":200,
+            "pos_y": 375,
+            "veloc_x": 0,
+            "veloc_y": 0,
+            "width": 0.5,
+            "height": 0.04,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 45,
+            "delay": 390
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Alert.png",
+            "pos_x":200,
+            "pos_y": 325,
+            "veloc_x": 0,
+            "veloc_y": 0,
+            "width": 0.5,
+            "height": 0.04,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 45,
+            "delay": 435
+          },
+          {
+            "category": "-",
+            "type": "L",
+            "texture": "Beam.png",
+            "number":5,
+            "pos_x": 0,
+            "seperation_x":0,
+            "pos_y": 525,
+            "seperation_y":-50,
+            "width": 3000,
+            "height": 50,
+            "damage": 5,
+            "angle": 0,
+            "change_angle":0,
+            "lifetime": 45,
+            "sound":"blaster.mp3",
+            "delay":295,
+            "beam_delay":45,
+            "decayDelay":5
+          }
+        ]
+      }
+    },
+    {
+      "name":"Third Attack",
+      "moveset":{
+        "moves":[
+          {
+           "category": "S",
+            "type" :"S",
+            "texture":"Spawner.png",
+            "childTexture":"Bullet.png",
+            "pos_x":350,
+            "pos_y":100,
+            "veloc_x":7,
+            "veloc_y":0,
+            "width":0.025,
+            "height":0.03,
+            "damage":2,
+            "behavior":8,
+            "angle":0,
+            "follow":"Y",
+            "repeat":7,
+            "repeat_delay":30,
+            "lifetime":60,
+            "childLifetime":2000,
+            "warningDelay":0,
+            "initalAngle":90,
+            "childVeloc":4,
+            "gravity":"N",
+            "gravity_direction":"R",
+            "gravity_stength":0.05,
+            "sound":"Pop.mp3",
+            "delay":100
+          },
+          {
+            "category": "B",
+            "type": "S",
+            "texture": "Bullet.png",
+            "pos_x":0,
+            "pos_y": 250,
+            "veloc_x": 1,
+            "veloc_y": 0,
+            "width": 0.02,
+            "height": 0.03,
+            "damage": 0,
+            "follow": "N",
+            "lifetime": 350,
+            "delay": 500
+          }
+        ]
+        }
+      }
+  ],
+  "event":[
+  {
+    "name":"startup",
+    "commands":[
+       {
+       	 "category":"D",
+       	 "texture":"Gray.png",
+       	 "text":"You are Dead",
+       	 "shade":"#8f001d",
+       	 "pos_x":300,
+       	 "pos_y":200,
+       	 "size":32
+       	 
+       },
+       {
+        "category":"A",
+      	"pos_x":200,
+      	"pos_y":250,
+      	"width":0.5,
+      	"height":0.5,
+      	"line_x":10,
+      	"line_y":4,
+      	"delay":0
+       },
+       {
+         "category":"P",
+         "texture":"Heart2.png",
+         "player_x":300,
+         "player_y":450,
+         "player_width":0.025,
+         "player_height":0.025,
+         "player_speedX":5,
+         "player_speedY":5,
+         "freeMoveX":"Y",
+         "freeMoveY":"N",
+         "sound":"hurt.mp3",
+         "health":10,
+         "delay":0
+      },
+      {
+        "category":"P",
+        "freeMoveX":"Y",
+        "freeMoveY":"Y",
+        "delay":325
+      },
+      {
+        "category":"A",
+      	"pos_x":200,
+      	"pos_y":250,
+      	"width":0.5,
+      	"height":0.1,
+      	"line_x":10,
+      	"line_y":4,
+      	"delay":650
+      },
+      {
+        "category":"A",
+      	"pos_x":375,
+      	"pos_y":250,
+      	"width":0.03,
+      	"height":0.03,
+      	"line_x":10,
+      	"line_y":4,
+      	"delay":1000
+      }
+     ]
+    }
+  ]
+}

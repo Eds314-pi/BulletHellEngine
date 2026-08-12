@@ -73,7 +73,7 @@ void growthDecay(struct beam*beams, Sound hurty, Sound beam, Vector2 beamColliso
         
         beams->fired=true;
     }
-    if(beams->power<beams->maxPower && !beams->decay)
+    if(beams->power<beams->maxPower && !beams->decay && beams->fired)
             {
                 beams->power += (float)beams->maxPower / 30.0f;
                 beams->hurtbox.height=beams->power;

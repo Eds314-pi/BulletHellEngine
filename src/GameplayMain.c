@@ -41,8 +41,8 @@ int gameplay(char* argv, bool* playing, char* path)
     player.startHealth=10;
     player.gameOver=false;
     player.time=IMMUNITY_TIMER;
-    player.currentHealth=(Rectangle){playableArea.playable.x,playableArea.playable.y+120+playableArea.playable.height,playableArea.playable.width,60};
-    player.maxHealth=(Rectangle){playableArea.playable.x,playableArea.playable.y+120+playableArea.playable.height,playableArea.playable.width,60};
+    player.currentHealth=(Rectangle){200,575,400,30};
+    player.maxHealth=(Rectangle){200,575,400,30};
     player.accelx=accelx;
     player.accely=accely;
     player.freeMoveX=true;
