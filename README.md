@@ -10,7 +10,7 @@ This project is an engine for the bullet hell archetype of games. Using the soft
 Easy to use "events" and "attacks" commands for users to customize their content using a configured JSON
 Ability to chain together "attacks" and "events" in tandem for more in depth experience
 High customization on bullets,beams,spawners,player,area for full creative control 
-Optimized engine able to handle high active bullet (300+) density for intense fights
+Optimized engine able to handle high active bullet (300+) density on a Rasberry Pi 4 for intense fights
 
 ## Getting Started
 
