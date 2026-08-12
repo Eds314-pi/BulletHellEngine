@@ -4,11 +4,12 @@ char* readFile(char* name)
 {\
     //ignores "\n"
     FILE* file=fopen(name,"rb");
-    if(file==NULL)
-    {
-        puts("Failed to find file");
-        return NULL;
-    }
+    if(file == NULL)
+{
+    printf("FAILED TO FIND FILE: %s\n", name);
+    perror("fopen");
+    return NULL;
+}
 
     fseek(file,0,SEEK_END);
     long size=ftell(file);
@@ -23,7 +24,7 @@ char* readFile(char* name)
 void openFile(char* fileName, struct fight *boss)
 {
     char name[250];
-    sprintf(name, "../fights/%s",fileName);
+    sprintf(name, "%s/fights/%s",boss->path,fileName);
     char* json=readFile(name);
     cJSON* fight = cJSON_Parse(json);
     cJSON* attacks = cJSON_GetObjectItem(fight, "attacks");
