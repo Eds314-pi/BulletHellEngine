@@ -124,7 +124,7 @@ void playerModifer(cJSON *move, struct fight *boss, int count)
     if(textureJSON!=NULL)
     {
         char texture[250];
-        sprintf(texture,".../images/%s",textureJSON->valuestring);
+        sprintf(texture,"../images/%s",textureJSON->valuestring);
         boss->events[boss->currentEvent].orders.playa.texture=LoadTexture(texture);
         boss->events[boss->currentEvent].orders.playa.scource=(Rectangle){0,0, boss->events[boss->currentEvent].orders.playa.texture.width, boss->events[boss->currentEvent].orders.playa.texture.height};
     }
