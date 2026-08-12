@@ -1,7 +1,5 @@
 
 
-https://github.com/user-attachments/assets/d76418b4-cf60-41da-aed7-0c5bc2fed20c
-
 # BulletHellEngine
 ## Premise
 This project is an engine for the bullet hell archetype of games. Using the software version built for a computer a user can create their own custom fights and transfer them to then play their own content on the portable device. The goal is for the user to have the freedom to use their full creativity to build encounters and patterns to their own liking without needing to code an entire game around it. 
