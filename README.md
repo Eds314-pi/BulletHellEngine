@@ -32,7 +32,7 @@ Clone the repository (No additional steps required)
 Ensure all textures,sounds, and JSON files are located within their respective folders within repository 
 
 ### Running 
-Compile the program in the terminal using in 'src' directory gcc *.c -lcjson -o game -lraylib -lm -lpthread -ldl -lrt -lX11
+Compile the program in the terminal using "gcc *.c -lcjson -o game -lraylib -lm -lpthread -ldl -lrt -lX11" in 'src' directory 
 
 Controls:
 Up/Down: Select desired JSON file
