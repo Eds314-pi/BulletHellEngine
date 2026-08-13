@@ -14,7 +14,7 @@ This project is designed to allow users to upload their content to a portable de
 -  7 wires
 
 ## Wiring
-- Solder all buttons onto the perfboard as shown on {INSERT PHOTO LOCATION} 
+- Solder all buttons onto the perfboard as shown on Portable Setup.png
 - Solder wires to buttons maintaining a diagonal between pins (It is recommended to have a common ground between arrow keys) 
 - Connect GPIO BCM pins to wires: 
 - 26 to up button 
