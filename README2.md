@@ -115,3 +115,30 @@ Note: width and height are measured in pixels, angle starts facing to the right 
 shrink as the height decreases to 0, seperation is the amount of distance between beams in a line, change_angle changes the angle per beam, sound only works on Computer ports
 
 ## Spawners
+
+"category": "S",
+            "type" :"S",
+            "texture":"Spawner.png",
+            "childTexture":"Bullet.png",
+            "pos_x":500,
+            "pos_y":105,
+            "veloc_x":5,
+            "veloc_y":0,
+            "width":0.025,
+            "height":0.03,
+            "damage":5,
+            "behavior":8,
+            "angle":180,
+            "follow":"N",
+            "repeat":7,
+            "repeat_delay":30,
+            "lifetime":30,
+            "childLifetime":2000,
+            "warningDelay":0,
+            "initalAngle":0,
+            "childVeloc":10,
+            "gravity":"Y",
+            "gravity_direction":"R",
+            "gravity_stength":0.05,
+            "sound":"Pop.mp3",
+            "delay":1000
