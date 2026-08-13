@@ -100,22 +100,22 @@ This creates a line of beams
 ```json
 "category": "-",
 "type": "L",
-"texture": "Beam.png",
-"number":3,
-"pos_x": 2200,
-"seperation_x":-400,
-"pos_y": 0,
-"seperation_y":0,
-"width": 3000,
-"height": 200,
-"damage": 5,
-"angle": 90,
-"change_angle":0,
-"lifetime": 45,
-"sound":"blaster.mp3",
-"delay":460,
-"beam_delay":45,
-"decayDelay":5
+"texture": "name.png",
+"number":x,
+"pos_x": x,
+"seperation_x":x,
+"pos_y": x,
+"seperation_y":x,
+"width": x,
+"height": x,
+"damage": x,
+"angle": x,
+"change_angle":x,
+"lifetime": x,
+"sound":"name.mp3",
+"delay":x,
+"beam_delay":x,
+"decayDelay":x
 ```
 Note: width and height are measured in pixels, angle starts facing to the right and moves clockwise, height is the maximum height as it grows to height, decayDelay is how many frames it has to 
 shrink as the height decreases to 0, seperation is the amount of distance between beams in a line, change_angle changes the angle per beam, sound only works on Computer ports
