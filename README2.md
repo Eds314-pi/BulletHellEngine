@@ -216,8 +216,8 @@ Modifies player
 Note: freeMove is the enabling of a grid if N then a grid using line in area is made and the player is locked onto them, sound is the hurt sound that plays whenever a player is hurt, width and height are a percentage of screen height. Only "texture", "freeMoveX","freeMoveY", and "delay" are required for this method
 
 ## Death Screen
-```json
 Creates the Death Screen
+```json
 "category":"D",
 "texture":"Gray.png",
 "text":"You are Dead",
