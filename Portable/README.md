@@ -2,11 +2,11 @@
 This project is designed to allow users to upload their content to a portable device to play on the go. This document will help with set up of portable device containing 3D models in this directory
 
 ## Components
-1. Raspberry pi 4 with 2 GB of RAM or greater
-2. waveshare 4 Inch Screen 800x480 Resolution for Raspberry pi 4B
-3. PerfBoard
-4. 5 mechanical buttons
-5. 7 wires
+- Raspberry pi 4 with 2 GB of RAM or greater
+-  waveshare 4 Inch Screen 800x480 Resolution for Raspberry pi 4B
+-  PerfBoard
+-  5 mechanical buttons
+-  7 wires
 
 ## Wiring
 - Solder all buttons onto the perfboard as shown on {INSERT PHOTO LOCATION} 
