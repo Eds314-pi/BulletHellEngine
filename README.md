@@ -29,6 +29,7 @@ Optimized engine able to handle high active bullet (300+) density on a Rasberry 
 
 ### Installation 
 Clone the repository (No additional steps required)
+Ensure all textures,sounds, and JSON files are located within their respective folders within repository 
 
 ### Running 
 Compile the program in the terminal using in 'src' directory gcc *.c -lcjson -o game -lraylib -lm -lpthread -ldl -lrt -lX11
