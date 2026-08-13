@@ -1,3 +1,5 @@
+
+
 ### Portable Device
 This project is designed to allow users to upload their content to a portable device to play on the go. This document will help with set up of portable device containing 3D models in this directory
 
@@ -5,6 +7,9 @@ This project is designed to allow users to upload their content to a portable de
 - Raspberry pi 4 with 2 GB of RAM or greater
 -  waveshare 4 Inch Screen 800x480 Resolution for Raspberry pi 4B
 -  PerfBoard
+
+
+
 -  5 mechanical buttons
 -  7 wires
 
@@ -32,3 +37,6 @@ This project is designed to allow users to upload their content to a portable de
 - Secure Raspberry pi using bolts and nuts to 'base' 
 - Drill holes for your buttons through 'cover' 
 - Attach and secure 'cover' to 'base' using screws
+
+## Boot up Video
+https://drive.google.com/file/d/1X7fE6cZNJxw-XGoSLpnj0Yf7Wo-p8V3L/view?usp=sharing
