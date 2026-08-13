@@ -32,7 +32,7 @@ Use this as a skeleton to work in:
 }
 ```
 ## Bullet:
-This creates one bullet in a specific spot according to customization 
+This creates one bullet in a specific spot
 ```json
 "category": "B",
 "type": "S",
@@ -51,7 +51,7 @@ This creates one bullet in a specific spot according to customization
 "gravity_stength":x
 "delay": x
 ```
-This creates x number of bullets in a spread according to customization
+This creates x number of bullets in a spread
 ```json
 "category": "B",
 "type": "R",
@@ -79,7 +79,8 @@ NOTE: width and height are factors of screen height, follow and gravity are eith
 neither gravity strength or direction is needed. Number is the number of bullets, +-[name] is the maximum variation
 
 ## Beam
-This creates one beam in a specific spot according to customization 
+This creates one beam in a specific spot 
+```json
 "category": "-",
 "type": "S",
 "texture": "name.png",
@@ -94,8 +95,9 @@ This creates one beam in a specific spot according to customization
 "sound":"name.mp3",
 "delay":x,
 "decayDelay":x
-
-This creates a line of beams according to customization 
+```
+This creates a line of beams 
+```json
 "category": "-",
 "type": "L",
 "texture": "Beam.png",
@@ -114,13 +116,13 @@ This creates a line of beams according to customization
 "delay":460,
 "beam_delay":45,
 "decayDelay":5
-
+```
 Note: width and height are measured in pixels, angle starts facing to the right and moves clockwise, height is the maximum height as it grows to height, decayDelay is how many frames it has to 
 shrink as the height decreases to 0, seperation is the amount of distance between beams in a line, change_angle changes the angle per beam, sound only works on Computer ports
 
 ## Spawners
 Creates one spawner
-
+```json
 "category": "S",
 "type" :"S",
 "texture":"name.png",
@@ -147,9 +149,10 @@ Creates one spawner
 "gravity_stength":x.x,
 "sound":"name.mp3",
 "delay":x
-
+```
 
 Creates a stack of spawners in the same area
+```json
 "category": "S",
 "type" :"E",
 "texture":"name.png",
@@ -176,11 +179,12 @@ Creates a stack of spawners in the same area
 "initalAngle":x,
 "sound":"name.mp3",
 "delay":x
-
+```
 Note: width and height are a percentage of screen size, damage is inherited by child, if behavior is greater than 0 the spawner will fire a x amount of bullets in a spread according to angle+inital angle. A spawner having repeat means after firing a bullet it will stay alive until repeat_delay is 0 then die (or repeat again), gravity does not affect spawner but its child 
 
 ## Area
 Modifies playable area
+```json
 "category":"A",
 "pos_x":x,
 "pos_y":x,
@@ -189,11 +193,12 @@ Modifies playable area
 "line_x":x,
 "line_y":x,
 "delay":x
-
+```
 Note: 'line' represents the amount of lines present on a grid system that can be enabled or disabled by modifying player directly, width and height are a percentage of screen size
 
 ## Player
 Modifies player
+```json
 "category":"P",
 "texture":"name.png",
 "player_x":x,
@@ -207,10 +212,11 @@ Modifies player
 "sound":"name.mp3",
 "health":x,
 "delay":x
-
+```
 Note: freeMove is the enabling of a grid if N then a grid using line in area is made and the player is locked onto them, sound is the hurt sound that plays whenever a player is hurt, width and height are a percentage of screen height. Only "texture", "freeMoveX","freeMoveY", and "delay" are required for this method
 
 ## Death Screen
+```json
 Creates the Death Screen
 "category":"D",
 "texture":"Gray.png",
@@ -219,5 +225,5 @@ Creates the Death Screen
 "pos_x":500,
 "pos_y":500,
 "size":32
-
+```
 Note: Texture is automatically size of screen only text is modified by shade position and size, shade is in hexadecimal
