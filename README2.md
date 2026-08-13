@@ -222,8 +222,8 @@ Creates the Death Screen
 "texture":"Gray.png",
 "text":"You are Dead",
 "shade":"#8f001d",
-"pos_x":500,
-"pos_y":500,
-"size":32
+"pos_x":x,
+"pos_y":x,
+"size":x
 ```
 Note: Texture is automatically size of screen only text is modified by shade position and size, shade is in hexadecimal
