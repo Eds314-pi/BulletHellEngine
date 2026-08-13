@@ -25,7 +25,7 @@ Use this as a skeleton to work in:
     "name":"startup",
     "commands":[
          {
-       }
+         }
      ]
     }
   ]
@@ -33,6 +33,7 @@ Use this as a skeleton to work in:
 ```
 ## Bullet:
 This creates one bullet in a specific spot according to customization 
+```json
 "category": "B",
 "type": "S",
 "texture": "name.png",
@@ -49,8 +50,9 @@ This creates one bullet in a specific spot according to customization
 "gravity_direction":"L"
 "gravity_stength":x
 "delay": x
-
+```
 This creates x number of bullets in a spread according to customization
+```json
 "category": "B",
 "type": "R",
 "texture": "name.png",
@@ -72,7 +74,7 @@ This creates x number of bullets in a spread according to customization
 "gravity_direction":"L"
 "gravity_stength":x
 "delay": x
-
+```
 NOTE: width and height are factors of screen height, follow and gravity are either Y or N, gravity direction is either "L","R","U" or "D" the if gravity is disabled 
 neither gravity strength or direction is needed. Number is the number of bullets, +-[name] is the maximum variation
 
