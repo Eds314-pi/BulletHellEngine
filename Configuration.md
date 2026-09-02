@@ -47,8 +47,8 @@ This creates one bullet in a specific spot
 "follow": "N",
 "lifetime": x,
 "gravity":"N",
-"gravity_direction":"L"
-"gravity_stength":x
+"gravity_direction":"L",
+"gravity_stength":x,
 "delay": x
 ```
 This creates x number of bullets in a spread
@@ -71,8 +71,8 @@ This creates x number of bullets in a spread
 "follow": "N",
 "lifetime": x,
 "gravity":"N",
-"gravity_direction":"L"
-"gravity_stength":x
+"gravity_direction":"L",
+"gravity_stength":x,
 "delay": x
 ```
 NOTE: width and height are factors of screen height, follow and gravity are either Y or N, gravity direction is either "L","R","U" or "D" the if gravity is disabled 
