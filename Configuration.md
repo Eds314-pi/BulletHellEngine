@@ -129,7 +129,7 @@ Creates one spawner
 "childTexture":"name.png",
 "pos_x":x,
 "pos_y":x,
-"veloc_x"x,
+"veloc_x:"x,
 "veloc_y":x,
 "width":x.x,
 "height":x.x,
