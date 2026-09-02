@@ -7,9 +7,9 @@ This project is an engine for the bullet hell archetype of games. Using the soft
 
 
 ## Features
-1. Easy to use "events" and "attacks" commands for users to customize their content using a configured JSON
-2. Ability to chain together "attacks" and "events" in tandem for more in depth experience
-3. High customization on bullets,beams,spawners,player,area for full creative control 
+ Easy to use "events" and "attacks" commands for users to customize their content using a configured JSON
+ Ability to chain together "attacks" and "events" in tandem for more in depth experience
+ High customization on bullets,beams,spawners,player,area for full creative control 
 
 ## Getting Started
 
