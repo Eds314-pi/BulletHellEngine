@@ -8,8 +8,8 @@ This project is an engine for the bullet hell archetype of games. Using the soft
 
 ## Features
 Easy to use "events" and "attacks" commands for users to customize their content using a configured JSON
-Ability to chain together "attacks" and "events" in tandem for more in depth experience
-High customization on bullets,beams,spawners,player,area for full creative control 
+Ability to chain together "attacks" and "events" in tandem for more in-depth experience
+High customization on bullets, beams, spawners, player, area for full creative control 
 Optimized engine able to handle 300+ bullets on the Raspberry Pi 4
 
 ## Getting Started
@@ -29,7 +29,7 @@ Optimized engine able to handle 300+ bullets on the Raspberry Pi 4
 
 ### Installation 
 Clone the repository (No additional steps required)
-Ensure all textures,sounds, and JSON files are located within their respective folders within repository 
+Ensure all textures, sounds, and JSON files are located within their respective folders within repository 
 
 ### Running 
 Compile the program in the terminal using "gcc *.c -lcjson -o game -lraylib -lm -lpthread -ldl -lrt -lX11" in 'src' directory 
@@ -38,5 +38,5 @@ Controls:
 Up/Down: Select desired JSON file
 Right: Begin Fight
 Arrow Keys: Move player
-Tab:Return to main menu
+Tab: Return to main menu
 
