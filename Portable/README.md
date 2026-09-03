@@ -28,7 +28,7 @@ This project is designed to allow users to upload their content to a portable de
 - Attach waveshare monitor and power on device
 - Download main branch of git repository
 - Install Raylib 
-- Install OpenGL (configure to ver. 2.1 as Raspberry pi 4 automatically install most up to date)
+- Install OpenGL (configure to ver. 2.1 as Raspberry pi 4 will automatically install most up to date)
 - Set monitor to be x11 in Advanced options
 - Set up Raspberry pi to run project on startup
 
