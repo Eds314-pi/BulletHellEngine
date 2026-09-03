@@ -48,8 +48,8 @@ This creates one bullet in a specific spot
 "lifetime": 360,
 "gravity":"N",
 "gravity_direction":"L",
-"gravity_stength":x,
-"delay": x
+"gravity_stength":0.05,
+"delay": 360
 ```
 This creates x number of bullets in a spread
 ```json
